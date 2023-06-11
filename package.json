@@ -1,4 +1,6 @@
 {
+  "name": "programmer-network-ajv",
+  "description": "A JSON Schema Validator",
   "type": "module",
   "scripts": {
     "test": "jest --watch"

@@ -18,18 +18,19 @@ export default {
   errors: true,
   compile: function compile() {
     return function validate(data) {
+      validate.errors = null;
       const { isValid, errorMessage } = StringUtils.isSecureString(data);
 
       if (!isValid) {
-        throw new this.ValidationError([
+        validate.errors = [
           {
             keyword: "secure-string",
-            message: errorMessage,
+            message: `${errorMessage}`,
             params: { invalidInput: data },
           },
-        ]);
+        ];
+        return false;
       }
-
       return true;
     };
   },

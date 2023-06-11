@@ -1,8 +1,8 @@
-import containsBadWords from "./contains-bad-words";
-import hasText from "./has-text";
-import isEmpty from "./is-empty";
-import secureString from "./is-secure-string";
-import validYouTubeUrl from "./is-youtube-url";
+import containsBadWords from "./contains-bad-words.js";
+import hasText from "./has-text.js";
+import isEmpty from "./is-empty.js";
+import secureString from "./is-secure-string.js";
+import validYouTubeUrl from "./is-youtube-url.js";
 
 export const keywords = [
   hasText,

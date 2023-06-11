@@ -1,5 +1,5 @@
-import StringUtils from "../Utils/StringUtils";
-import TiptapUtils from "../Utils/TiptapUtils";
+import StringUtils from "../Utils/StringUtils/index.js";
+import TiptapUtils from "../Utils/TiptapUtils/index.js";
 
 export default {
   type: "string",

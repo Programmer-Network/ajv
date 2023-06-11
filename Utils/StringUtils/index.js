@@ -3,7 +3,7 @@ import {
   COMBINED_CHARACTERS_REGEX,
   SPECIAL_CHARACTERS_AND_WHITE_SPACE,
   UNICODE_SPACE_CHARACTERS_REGEX,
-} from "../../constants";
+} from "../../constants.js";
 
 class StringUtils {
   /**

@@ -1,4 +1,4 @@
-import StringUtils from "../Utils/StringUtils";
+import StringUtils from "../Utils/StringUtils/index.js";
 
 /**
  * The 'compile' method is a function that AJV calls during the schema compilation.

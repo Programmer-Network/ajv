@@ -1,4 +1,4 @@
-import StringUtils from ".";
+import StringUtils from "./index.js";
 
 describe("StringUtils", () => {
   describe("safeJSONParse", () => {

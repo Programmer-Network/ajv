@@ -1,4 +1,4 @@
-import StringUtils from "../StringUtils";
+import StringUtils from "../StringUtils/index.js";
 
 class TiptapUtils {
   reduceTextNodesToString(value) {

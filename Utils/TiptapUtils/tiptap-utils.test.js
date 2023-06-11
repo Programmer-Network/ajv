@@ -1,4 +1,4 @@
-import TiptapUtils from ".";
+import TiptapUtils from "./index.js";
 
 describe("TiptapUtils", () => {
   describe("reduceTextNodesToString", () => {

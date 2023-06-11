@@ -1,2 +1,5 @@
-export * as keywords from "./Keywords";
-export * as schemas from "./Schemas";
+import { keywords } from "./Keywords/index.js";
+
+export default {
+  keywords,
+};

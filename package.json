@@ -2,6 +2,7 @@
   "name": "programmer-network-ajv",
   "description": "A JSON Schema Validator",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "jest --watch"
   },

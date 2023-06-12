@@ -1,6 +1,5 @@
 export const UNICODE_SPACE_CHARACTERS = [
   "\u0009",
-  "\u0020",
   "\u00A0",
   "\u00AD",
   "\u180E",

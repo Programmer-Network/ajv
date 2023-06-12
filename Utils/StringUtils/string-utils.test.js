@@ -75,7 +75,7 @@ describe("StringUtils", () => {
   describe("removeSpecialCharacters", () => {
     test("should remove special characters from the string", () => {
       expect(StringUtils.removeSpecialCharacters("Hello, +world!")).toBe(
-        "Helloworld"
+        "Hello world"
       );
     });
   });
@@ -131,7 +131,7 @@ describe("StringUtils", () => {
       const result = StringUtils.isSecureString("Hello, world!");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
-        "The string contains Unicode space characters"
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
       );
     });
 
@@ -157,6 +157,13 @@ describe("StringUtils", () => {
       expect(result.errorMessage).toBe(
         "The string contains combined characters"
       );
+    });
+
+    test("should return true if the string has white spaces", () => {
+      expect(StringUtils.isSecureString("Hello-world! ")).toEqual({
+        isValid: true,
+        errorMessage: null,
+      });
     });
   });
 });

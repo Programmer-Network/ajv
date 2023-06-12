@@ -38,7 +38,7 @@ class StringUtils {
   }
 
   /**
-   * Checks if a string contains any characters that are not alphanumeric, "-", "!", or "?".
+   * Checks if a string contains any characters that are not alphanumeric, "-", "!", "?", or a space.
    * @param {string} value - The string to check.
    * @returns {boolean} - Returns true if the string contains disallowed characters, else false.
    */

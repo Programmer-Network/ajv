@@ -23,7 +23,7 @@ describe("TiptapUtils", () => {
     test("should return length of text property for text node", () => {
       expect(
         TiptapUtils.countObjectText({ type: "text", text: "Hello world!" })
-      ).toBe(10);
+      ).toBe(11);
     });
 
     test("should return sum of text lengths for array of nodes", () => {
@@ -56,7 +56,7 @@ describe("TiptapUtils", () => {
     test("should return isNotEmpty true and length for object with text", () => {
       expect(
         TiptapUtils.hasText({ type: "text", text: "Hello world!" })
-      ).toEqual({ isNotEmpty: true, length: 10 });
+      ).toEqual({ isNotEmpty: true, length: 11 });
     });
 
     test("should return isNotEmpty false and 0 length for object without text", () => {

@@ -3,8 +3,8 @@ export const courseSection = {
   additionalProperties: false,
   required: ["title", "order"],
   properties: {
-    title: { type: "string", alphanumeric: true },
-    description: { type: "string", alphanumeric: true },
+    title: { type: "string", "secure-string": true },
+    description: { type: "string", "secure-string": true },
     order: { type: "integer" },
   },
 };

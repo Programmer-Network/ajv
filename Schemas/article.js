@@ -1,3 +1,10 @@
+const titleMinLength = 25;
+const titleMaxLength = 130;
+
+const summaryMinLength = 45;
+const summaryMaxLength = 250;
+const contentMinLength = 250;
+
 export const article = {
   type: "object",
   additionalProperties: false,
@@ -6,8 +13,8 @@ export const article = {
     title: {
       type: "string",
       containsBadWords: false,
-      minLength: 25,
-      maxLength: 130,
+      minLength: titleMinLength,
+      maxLength: titleMaxLength,
       errorMessage: {
         containsBadWords:
           "Profanity is not allowed. Please update your content.",
@@ -15,8 +22,8 @@ export const article = {
     },
     summary: {
       type: "string",
-      minLength: 45,
-      maxLength: 250,
+      minLength: summaryMinLength,
+      maxLength: summaryMaxLength,
     },
     tags: {
       type: "array",
@@ -30,7 +37,7 @@ export const article = {
     content: {
       type: "string",
       containsBadWords: false,
-      hasText: { minLength: 250 },
+      hasText: { minLength: contentMinLength },
       errorMessage: {
         containsBadWords:
           "Profanity is not allowed. Please update your content.",

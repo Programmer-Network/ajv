@@ -113,6 +113,7 @@ describe("StringUtils", () => {
 
     test("Should return true if a value is a tab", () => {
       expect(StringUtils.isStringComposedOfWhitespace(" ")).toBeTruthy();
+      expect(StringUtils.isStringComposedOfWhitespace("       ")).toBeTruthy();
       expect(
         StringUtils.isStringComposedOfWhitespace("         ")
       ).toBeTruthy();

@@ -85,6 +85,12 @@ class StringUtils {
       .replace(SPECIAL_CHARACTERS_AND_WHITE_SPACE, "");
   }
 
+  /**
+   * Checks if a given string is composed entirely of whitespace characters.
+   *
+   * @param {string} value - The string to check.
+   * @returns {boolean} - Returns `true` if the string is entirely whitespace, otherwise `false`.
+   */
   isStringComposedOfWhitespace = value => {
     return /^\s*$/.test(value);
   };

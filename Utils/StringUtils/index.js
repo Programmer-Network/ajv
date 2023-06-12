@@ -43,7 +43,7 @@ class StringUtils {
    * @returns {boolean} - Returns true if the string contains disallowed characters, else false.
    */
   containsDisallowedCharacters(value) {
-    return /[^a-zA-Z0-9-!?]/.test(value);
+    return /[^a-zA-Z0-9-!? ]/.test(value);
   }
 
   /**
@@ -85,12 +85,17 @@ class StringUtils {
       .replace(SPECIAL_CHARACTERS_AND_WHITE_SPACE, "");
   }
 
+  isStringComposedOfWhitespace = value => {
+    return /^\s*$/.test(value);
+  };
+
   /**
    * Checks if a string is secure. A string is considered secure if it meets the following criteria:
    * 1. Contains no non-alphanumeric characters.
    * 2. Contains no special characters other than "-", "!" or "?".
    * 3. Contains no Unicode space characters.
    * 4. Contains no combined characters.
+   * 5. Is not composed entirely of whitespace characters.
    *
    * @param {string} value - The string to check.
    * @returns {Object} - Returns an object with a `isValid` boolean indicating if the string is secure, and an `errorMessage` string describing the validation error if `isValid` is false.
@@ -114,7 +119,15 @@ class StringUtils {
       return {
         isValid: false,
         errorMessage:
-          "The string contains characters that are not alphanumeric, a dash, an exclamation mark, or a question mark",
+          "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space",
+      };
+    }
+
+    if (this.isStringComposedOfWhitespace(value)) {
+      return {
+        isValid: false,
+        errorMessage:
+          "The string is composed entirely of whitespace characters",
       };
     }
 

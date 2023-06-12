@@ -106,6 +106,19 @@ describe("StringUtils", () => {
     });
   });
 
+  describe("Test isStringComposedOfWhitespace function", () => {
+    test("Should return true if a value is a space", () => {
+      expect(StringUtils.isStringComposedOfWhitespace(" ")).toBeTruthy();
+    });
+
+    test("Should return true if a value is a tab", () => {
+      expect(StringUtils.isStringComposedOfWhitespace(" ")).toBeTruthy();
+      expect(
+        StringUtils.isStringComposedOfWhitespace("         ")
+      ).toBeTruthy();
+    });
+  });
+
   describe("isSecureString", () => {
     test("should return true for secure string", () => {
       expect(StringUtils.isSecureString("Hello-world!")).toEqual({
@@ -113,6 +126,7 @@ describe("StringUtils", () => {
         errorMessage: null,
       });
     });
+
     test("should return false with appropriate error message for string with non-alphanumeric characters", () => {
       const result = StringUtils.isSecureString("Hello, world!");
       expect(result.isValid).toBe(false);
@@ -120,13 +134,15 @@ describe("StringUtils", () => {
         "The string contains Unicode space characters"
       );
     });
+
     test("should return false with appropriate error message for string with disallowed special characters", () => {
       const result = StringUtils.isSecureString("Hello@world");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
-        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, or a question mark"
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
       );
     });
+
     test("should return false with appropriate error message for string with Unicode space characters", () => {
       const result = StringUtils.isSecureString("Hello\u2003world");
       expect(result.isValid).toBe(false);
@@ -134,6 +150,7 @@ describe("StringUtils", () => {
         "The string contains Unicode space characters"
       );
     });
+
     test("should return false with appropriate error message for string with combined characters", () => {
       const result = StringUtils.isSecureString("Hello\u034Fworld");
       expect(result.isValid).toBe(false);

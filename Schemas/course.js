@@ -8,3 +8,5 @@ export const course = {
     type: { type: "string", enum: ["free", "premium"] },
   },
 };
+
+export default { course };

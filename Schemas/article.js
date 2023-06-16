@@ -5,13 +5,14 @@ const summaryMinLength = 45;
 const summaryMaxLength = 250;
 const contentMinLength = 250;
 
-export const article = {
+const article = {
   type: "object",
   additionalProperties: false,
   required: ["title", "summary", "tags", "content", "isDraft"],
   properties: {
     title: {
       type: "string",
+      "secure-string": true,
       containsBadWords: false,
       minLength: titleMinLength,
       maxLength: titleMaxLength,
@@ -22,6 +23,7 @@ export const article = {
     },
     summary: {
       type: "string",
+      "secure-string": true,
       minLength: summaryMinLength,
       maxLength: summaryMaxLength,
     },
@@ -36,6 +38,7 @@ export const article = {
     },
     content: {
       type: "string",
+      "secure-string": true,
       containsBadWords: false,
       hasText: { minLength: contentMinLength },
       errorMessage: {
@@ -48,3 +51,5 @@ export const article = {
     },
   },
 };
+
+export default { article }

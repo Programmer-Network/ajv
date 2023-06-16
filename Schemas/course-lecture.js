@@ -8,3 +8,8 @@ export const courseLecture = {
     content: { type: "string", "secure-string": true },
   },
 };
+
+
+export default {
+  courseLecture
+};

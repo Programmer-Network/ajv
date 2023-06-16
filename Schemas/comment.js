@@ -1,4 +1,4 @@
-export const comment = {
+const comment = {
   type: "object",
   additionalProperties: false,
   required: ["content"],
@@ -9,3 +9,6 @@ export const comment = {
     },
   },
 };
+
+
+export default { comment };

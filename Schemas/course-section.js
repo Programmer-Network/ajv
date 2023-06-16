@@ -8,3 +8,6 @@ export const courseSection = {
     order: { type: "integer" },
   },
 };
+
+
+export default { courseSection };

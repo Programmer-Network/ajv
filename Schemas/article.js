@@ -30,11 +30,19 @@ const article = {
     tags: {
       type: "array",
       items: {
-        type: "number",
+        type: "object",
+        properties: {
+          label: {
+            type: "string"
+          },
+          value: {
+            type: "integer"
+          }
+        }
       },
       minItems: 1,
       maxItems: 5,
-      uniqueItems: true,
+      uniqueItems: true
     },
     content: {
       type: "string",

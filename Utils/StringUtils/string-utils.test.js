@@ -61,14 +61,16 @@ describe("StringUtils", () => {
   });
 
   describe("containsBadWords", () => {
-    test("should return true for string containing bad words", () => {
-      expect(StringUtils.containsBadWords("There is a penis.")).toBe(true);
+    test("should return a string array of a single bad word", () => {
+      expect(StringUtils.containsBadWords("There is a penis.")).toStrictEqual(['penis']);
+    });
+
+    test("should return a string array of multiple bad words", () => {
+      expect(StringUtils.containsBadWords("There is a penis fuck.")).toStrictEqual(['penis', 'fuck']);
     });
 
     test("should return false for string without bad words", () => {
-      expect(StringUtils.containsBadWords("This is a good sentence.")).toBe(
-        false
-      );
+      expect(StringUtils.containsBadWords("This is a good sentence.")).toStrictEqual([]);
     });
   });
 
@@ -104,6 +106,12 @@ describe("StringUtils", () => {
     test("Check empty string", () => {
       expect(StringUtils.containsDisallowedCharacters("")).toBeFalsy();
     });
+
+
+    test("A string with Danish characters should be valid", () => {
+      expect(StringUtils.containsDisallowedCharacters("äöå")).toBeFalsy();
+    });
+
   });
 
   describe("Test isStringComposedOfWhitespace function", () => {
@@ -164,6 +172,18 @@ describe("StringUtils", () => {
       expect(StringUtils.isSecureString("Hello-world! ")).toEqual({
         isValid: true,
         errorMessage: null,
+      });
+    });
+
+    test("should fail and return a proper message if profanity is used", () => {
+      expect(StringUtils.isSecureString("Hey there penis")).toEqual({
+        isValid: false,
+        errorMessage: "Profanity is not allowed. Please remove the following words: 'penis'",
+      });
+
+      expect(StringUtils.isSecureString("Hey there penis fuck")).toEqual({
+        isValid: false,
+        errorMessage: "Profanity is not allowed. Please remove the following words: 'penis, fuck'",
       });
     });
   });

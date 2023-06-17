@@ -46,7 +46,6 @@ const article = {
     },
     content: {
       type: "string",
-      "secure-string": true,
       containsBadWords: false,
       hasText: { minLength: contentMinLength },
       errorMessage: {

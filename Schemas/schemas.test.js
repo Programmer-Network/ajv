@@ -30,8 +30,6 @@ describe("Article Schema", () => {
 
         const valid = validate(article);
 
-        console.log(validate.errors);
-
         expect(valid).toBe(false);
     });
 });

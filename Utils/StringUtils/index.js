@@ -2,7 +2,7 @@ import {
   BAD_WORDS_REGEX,
   COMBINED_CHARACTERS_REGEX,
   SPECIAL_CHARACTERS_AND_WHITE_SPACE,
-  UNICODE_SPACE_CHARACTERS_REGEX,
+  UNICODE_SPACE_CHARACTERS_REGEX
 } from "../../constants.js";
 
 class StringUtils {
@@ -43,7 +43,7 @@ class StringUtils {
    * @returns {boolean} - Returns true if the string contains disallowed characters, else false.
    */
   containsDisallowedCharacters(value) {
-    return /[^a-zA-Z0-9-!? ]/.test(value);
+    return /[^a-zA-Z0-9-!? \u00C0-\u02AF]/.test(value);
   }
 
   /**
@@ -67,11 +67,12 @@ class StringUtils {
   /**
    * Checks if a string contains any words from a list of bad words.
    * @param {string} value - The string to check.
-   * @returns {boolean} - Returns true if the string contains bad words, else false.
+   * @returns {Array<string>} - Returns an array of bad words if found, else an empty array.
    */
   containsBadWords(value) {
-    return BAD_WORDS_REGEX.test(value);
+    return [...value.matchAll(BAD_WORDS_REGEX)].map(match => match[0]);
   }
+
 
   /**
    * Removes all special characters, Unicode space characters and combined characters from a string.
@@ -134,6 +135,17 @@ class StringUtils {
         isValid: false,
         errorMessage:
           "The string is composed entirely of whitespace characters",
+      };
+    }
+
+
+    const badWords = this.containsBadWords(value);
+
+    if (badWords.length) {
+      return {
+        isValid: false,
+        errorMessage:
+          `Profanity is not allowed. Please remove the following words: '${badWords.join(', ')}'`,
       };
     }
 

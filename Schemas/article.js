@@ -16,10 +16,6 @@ const article = {
       getBadWords: false,
       minLength: titleMinLength,
       maxLength: titleMaxLength,
-      errorMessage: {
-        getBadWords:
-          "Profanity is not allowed. Please update your content.",
-      },
     },
     summary: {
       type: "string",
@@ -48,10 +44,6 @@ const article = {
       type: "string",
       getBadWords: false,
       hasText: { minLength: contentMinLength },
-      errorMessage: {
-        getBadWords:
-          "Profanity is not allowed. Please update your content.",
-      },
     },
     isDraft: {
       type: "boolean",

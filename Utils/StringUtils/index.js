@@ -25,19 +25,6 @@ class StringUtils {
   }
 
   /**
-   * Checks if a string is empty after trimming whitespace.
-   * @param {string} value - The string to check.
-   * @returns {boolean} - Returns true if the string is empty or only contains whitespace, else false.
-   */
-  isEmpty(value) {
-    if (!value) {
-      return true;
-    }
-
-    return typeof value === "string" && value.trim() === "";
-  }
-
-  /**
    * Checks if a string contains any characters that are not alphanumeric, "-", "!", "?", or a space.
    * @param {string} value - The string to check.
    * @returns {boolean} - Returns true if the string contains disallowed characters, else false.

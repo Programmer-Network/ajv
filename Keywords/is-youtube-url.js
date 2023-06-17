@@ -1,6 +1,6 @@
 export default {
   type: "string",
-  errors: false,
+  errors: true,
   keyword: "is-youtube-url",
   validate: (_, value) => {
     if (!value) {

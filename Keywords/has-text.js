@@ -19,7 +19,6 @@ export default {
       return;
     }
 
-    const { minLength, maxLength } = schema;
     const { isNotEmpty, length } = TiptapUtils.hasText(data);
 
     if (!isNotEmpty) {
@@ -33,26 +32,23 @@ export default {
       return false;
     }
 
-    if (length < minLength) {
+    if (schema.minLength && length < schema.minLength) {
       validate.errors = [
         {
           keyword: "hasText",
-          message: `The text must have a length greater than or equal to ${minLength} characters`,
-          params: { minLength, maxLength },
+          message: `The text must have a length greater than or equal to ${schema.minLength} characters`,
+          params: { minLength: schema.minLength },
         },
       ];
       return false;
     }
 
-    if (
-      Object.prototype.hasOwnProperty.call(schema, "maxLength") &&
-      length > maxLength
-    ) {
+    if (schema.maxLength && length > schema.maxLength) {
       validate.errors = [
         {
           keyword: "hasText",
-          message: `The length of the text cannot exceed ${maxLength} characters`,
-          params: { minLength, maxLength },
+          message: `The length of the text cannot exceed ${schema.maxLength} characters`,
+          params: { maxLength: schema.maxLength },
         },
       ];
 

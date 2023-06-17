@@ -1,14 +1,29 @@
 import StringUtils from "../Utils/StringUtils/index.js";
 
+const keyword = 'getBadWords';
+
 export default {
   type: "string",
   errors: true,
-  keyword: "containsBadWords",
-  validate: (_, value) => {
-    if (StringUtils.containsBadWords(value)) {
-      return false;
-    }
+  keyword,
+  compile: function compile() {
+    return function validate(value) {
+      validate.errors = null;
 
-    return true;
+      const badWords = StringUtils.getBadWords(value);
+
+      if (badWords.length) {
+        validate.errors = [
+          {
+            keyword,
+            message: `Profanity is not allowed. Please remove the following words: '${badWords.join(', ')}'`,
+            params: { invalidInput: value },
+          },
+        ];
+        return false;
+      }
+
+      return true;
+    };
   },
 };

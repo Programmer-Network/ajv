@@ -13,11 +13,11 @@ const article = {
     title: {
       type: "string",
       "secure-string": true,
-      containsBadWords: false,
+      getBadWords: false,
       minLength: titleMinLength,
       maxLength: titleMaxLength,
       errorMessage: {
-        containsBadWords:
+        getBadWords:
           "Profanity is not allowed. Please update your content.",
       },
     },
@@ -46,10 +46,10 @@ const article = {
     },
     content: {
       type: "string",
-      containsBadWords: false,
+      getBadWords: false,
       hasText: { minLength: contentMinLength },
       errorMessage: {
-        containsBadWords:
+        getBadWords:
           "Profanity is not allowed. Please update your content.",
       },
     },

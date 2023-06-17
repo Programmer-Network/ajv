@@ -60,17 +60,17 @@ describe("StringUtils", () => {
     });
   });
 
-  describe("containsBadWords", () => {
+  describe("getBadWords", () => {
     test("should return a string array of a single bad word", () => {
-      expect(StringUtils.containsBadWords("There is a penis.")).toStrictEqual(['penis']);
+      expect(StringUtils.getBadWords("There is a penis.")).toStrictEqual(['penis']);
     });
 
     test("should return a string array of multiple bad words", () => {
-      expect(StringUtils.containsBadWords("There is a penis fuck.")).toStrictEqual(['penis', 'fuck']);
+      expect(StringUtils.getBadWords("There is a penis fuck.")).toStrictEqual(['penis', 'fuck']);
     });
 
     test("should return false for string without bad words", () => {
-      expect(StringUtils.containsBadWords("This is a good sentence.")).toStrictEqual([]);
+      expect(StringUtils.getBadWords("This is a good sentence.")).toStrictEqual([]);
     });
   });
 

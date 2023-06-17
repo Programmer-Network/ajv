@@ -69,7 +69,7 @@ class StringUtils {
    * @param {string} value - The string to check.
    * @returns {Array<string>} - Returns an array of bad words if found, else an empty array.
    */
-  containsBadWords(value) {
+  getBadWords(value) {
     return [...value.matchAll(BAD_WORDS_REGEX)].map(match => match[0]);
   }
 
@@ -139,7 +139,7 @@ class StringUtils {
     }
 
 
-    const badWords = this.containsBadWords(value);
+    const badWords = this.getBadWords(value);
 
     if (badWords.length) {
       return {

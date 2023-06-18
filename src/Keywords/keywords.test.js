@@ -152,5 +152,197 @@ describe("Keywords", () => {
 
       expect(valid).toBe(true);
     });
+
+    test("should fail if the string contains dissallowed characters", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "This is some text /",
+      });
+
+      const [error] = validate.errors;
+
+      console.log(error);
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe(
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
+      );
+    });
+
+    test("should fail if the string contains dissallowed characters", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "This is some text /",
+      });
+
+      const [error] = validate.errors;
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe(
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
+      );
+    });
+
+    test("should fail if the string contains profanity", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "This is some text penis",
+      });
+
+      const [error] = validate.errors;
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe(
+        "Profanity is not allowed. Please remove the following words: 'penis'"
+      );
+    });
+
+    test("should fail if the string only contains space characters", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "            ",
+      });
+
+      const [error] = validate.errors;
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe(
+        "The string is composed entirely of whitespace characters"
+      );
+    });
+
+    test("should fail if the string only contains space characters", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "            ",
+      });
+
+      const [error] = validate.errors;
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe(
+        "The string is composed entirely of whitespace characters"
+      );
+    });
+
+    test("should fail if the string contains unicode characters", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "This string contains unicode character ​",
+      });
+
+      const [error] = validate.errors;
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe(
+        "The string contains Unicode space characters"
+      );
+    });
+
+    test("should fail if the string contains combined characters", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "Hello\u034Fworld",
+      });
+
+      const [error] = validate.errors;
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe("The string contains combined characters");
+    });
+
+    test("should fail in the correct order", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "  Hello\u034Fworld penis ​",
+      });
+
+      const [error] = validate.errors;
+
+      expect(valid).toBe(false);
+      expect(error.message).toBe(
+        "The string contains Unicode space characters"
+      );
+    });
   });
 });

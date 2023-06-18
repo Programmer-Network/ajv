@@ -94,6 +94,13 @@ class StringUtils {
    * @returns {Object} - Returns an object with a `isValid` boolean indicating if the string is secure, and an `errorMessage` string describing the validation error if `isValid` is false.
    */
   isSecureString = (value) => {
+    if (value === "") {
+      return {
+        isValid: true,
+        errorMessage: null,
+      };
+    }
+
     if (this.containsUnicodeSpaceCharacters(value)) {
       return {
         isValid: false,

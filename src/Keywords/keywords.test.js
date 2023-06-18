@@ -134,6 +134,25 @@ describe("Keywords", () => {
   });
 
   describe("secure-string", () => {
+    test("should pass if the string is empty", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            "secure-string": true,
+          },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: "",
+      });
+
+      expect(valid).toBe(true);
+    });
+
     test("should pass if the string is secure", () => {
       const schema = {
         type: "object",

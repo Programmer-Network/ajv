@@ -15,7 +15,7 @@ class TiptapUtils {
       .trim();
   }
 
-  countObjectText = node => {
+  countObjectText = (node) => {
     if (!node) {
       return 0;
     }
@@ -41,7 +41,7 @@ class TiptapUtils {
     return 0;
   };
 
-  hasText = obj => {
+  hasText = (obj) => {
     const totalLength = this.countObjectText(obj);
 
     return {

@@ -2,8 +2,8 @@ import {
   BAD_WORDS_REGEX,
   COMBINED_CHARACTERS_REGEX,
   SPECIAL_CHARACTERS_AND_WHITE_SPACE,
-  UNICODE_SPACE_CHARACTERS_REGEX
-} from "../../constants.js";
+  UNICODE_SPACE_CHARACTERS_REGEX,
+} from "../../../constants.js";
 
 class StringUtils {
   /**
@@ -57,9 +57,8 @@ class StringUtils {
    * @returns {Array<string>} - Returns an array of bad words if found, else an empty array.
    */
   getBadWords(value) {
-    return [...value.matchAll(BAD_WORDS_REGEX)].map(match => match[0]);
+    return [...value.matchAll(BAD_WORDS_REGEX)].map((match) => match[0]);
   }
-
 
   /**
    * Removes all special characters, Unicode space characters and combined characters from a string.
@@ -79,7 +78,7 @@ class StringUtils {
    * @param {string} value - The string to check.
    * @returns {boolean} - Returns `true` if the string is entirely whitespace, otherwise `false`.
    */
-  isStringComposedOfWhitespace = value => {
+  isStringComposedOfWhitespace = (value) => {
     return /^\s*$/.test(value);
   };
 
@@ -94,7 +93,7 @@ class StringUtils {
    * @param {string} value - The string to check.
    * @returns {Object} - Returns an object with a `isValid` boolean indicating if the string is secure, and an `errorMessage` string describing the validation error if `isValid` is false.
    */
-  isSecureString = value => {
+  isSecureString = (value) => {
     if (this.containsUnicodeSpaceCharacters(value)) {
       return {
         isValid: false,
@@ -125,14 +124,14 @@ class StringUtils {
       };
     }
 
-
     const badWords = this.getBadWords(value);
 
     if (badWords.length) {
       return {
         isValid: false,
-        errorMessage:
-          `Profanity is not allowed. Please remove the following words: '${badWords.join(', ')}'`,
+        errorMessage: `Profanity is not allowed. Please remove the following words: '${badWords.join(
+          ", "
+        )}'`,
       };
     }
 

@@ -9,7 +9,6 @@ export const courseLecture = {
   },
 };
 
-
 export default {
-  courseLecture
+  courseLecture,
 };

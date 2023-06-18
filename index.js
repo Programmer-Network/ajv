@@ -1,7 +1,7 @@
-import { keywords } from "./Keywords/index.js";
-import { schemas } from "./Schemas/index.js";
+import { keywords } from "./src/Keywords/index.js";
+import { schemas } from "./src/Schemas/index.js";
 
 export default {
   keywords,
-  schemas
+  schemas,
 };

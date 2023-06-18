@@ -29,16 +29,16 @@ const article = {
         type: "object",
         properties: {
           label: {
-            type: "string"
+            type: "string",
           },
           value: {
-            type: "integer"
-          }
-        }
+            type: "integer",
+          },
+        },
       },
       minItems: 1,
       maxItems: 5,
-      uniqueItems: true
+      uniqueItems: true,
     },
     content: {
       type: "string",
@@ -51,4 +51,4 @@ const article = {
   },
 };
 
-export default { article }
+export default { article };

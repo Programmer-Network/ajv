@@ -9,5 +9,4 @@ export const courseSection = {
   },
 };
 
-
 export default { courseSection };

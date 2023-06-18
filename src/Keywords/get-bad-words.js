@@ -1,6 +1,6 @@
 import StringUtils from "../Utils/StringUtils/index.js";
 
-const keyword = 'getBadWords';
+const keyword = "getBadWords";
 
 export default {
   type: "string",
@@ -16,7 +16,9 @@ export default {
         validate.errors = [
           {
             keyword,
-            message: `Profanity is not allowed. Please remove the following words: '${badWords.join(', ')}'`,
+            message: `Profanity is not allowed. Please remove the following words: '${badWords.join(
+              ", "
+            )}'`,
             params: { invalidInput: value },
           },
         ];

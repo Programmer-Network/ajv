@@ -4,7 +4,7 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --watch src",
     "pre-commit": "lint-staged",
     "format": "prettier --write \"**/*.+(js|json|css|md)\"",
     "lint": "eslint src",

@@ -171,8 +171,6 @@ describe("Keywords", () => {
 
       const [error] = validate.errors;
 
-      console.log(error);
-
       expect(valid).toBe(false);
       expect(error.message).toBe(
         "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"

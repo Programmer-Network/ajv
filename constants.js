@@ -64,9 +64,8 @@ export const UNICODE_SPACE_CHARACTERS_REGEX = new RegExp(
   "g"
 );
 
-export const COMBINED_CHARACTERS_REGEX = new RegExp(
-  `[${COMBINED_CHARACTERS.join("")}]+`,
-  "gu"
+export const COMBINED_CHARACTERS_REGEX = COMBINED_CHARACTERS.map(
+  (character) => new RegExp(character, "gu")
 );
 
 export const DISALLOWED_CHARACTERS_REGEX = new RegExp(

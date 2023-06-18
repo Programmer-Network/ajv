@@ -48,7 +48,7 @@ class StringUtils {
    * @returns {boolean} - Returns true if the string contains combined characters, else false.
    */
   containsCombinedCharacters(value) {
-    return COMBINED_CHARACTERS_REGEX.test(value);
+    return COMBINED_CHARACTERS_REGEX.some((regex) => regex.test(value));
   }
 
   /**

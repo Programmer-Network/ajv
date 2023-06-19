@@ -131,6 +131,40 @@ describe("Keywords", () => {
       expect(valid).toBe(false);
       expect(error.message).toBe("The value must contain text");
     });
+
+    test("should pass if the text contains a valid YouTube URL", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: {
+            type: "string",
+            hasText: { minLength: 5, max: 300 },
+          },
+        },
+      };
+
+      const data = JSON.stringify({
+        type: "doc",
+        content: [
+          {
+            type: "youtube",
+            attrs: {
+              src: "https://www.youtube.com/watch?v=uxQxd_z_uqc",
+              start: 0,
+              width: 640,
+              height: 480,
+            },
+          },
+        ],
+      });
+
+      const validate = ajv.compile(schema);
+      const valid = validate({
+        foo: data,
+      });
+
+      expect(valid).toBe(true);
+    });
   });
 
   describe("secure-string", () => {

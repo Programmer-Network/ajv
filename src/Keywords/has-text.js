@@ -19,6 +19,10 @@ export default {
       return;
     }
 
+    if (TiptapUtils.containsYouTubeVideo(data.content)) {
+      return true;
+    }
+
     const { isNotEmpty, length } = TiptapUtils.hasText(data);
 
     if (!isNotEmpty) {

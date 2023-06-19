@@ -56,13 +56,6 @@ class TiptapUtils {
   };
 
   hasText = (obj) => {
-    if (this.containsYouTubeVideo(obj.content)) {
-      return {
-        isNotEmpty: true,
-        length: 0,
-      };
-    }
-
     const totalLength = this.countObjectText(obj);
 
     return {

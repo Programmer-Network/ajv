@@ -115,24 +115,5 @@ describe("TiptapUtils", () => {
         TiptapUtils.hasText({ type: "other", content: "Some content" })
       ).toEqual({ isNotEmpty: false, length: 0 });
     });
-
-    test("should not require text length if content contains youtube video", () => {
-      expect(
-        TiptapUtils.hasText({
-          type: "doc",
-          content: [
-            {
-              type: "youtube",
-              attrs: {
-                src: "https://www.youtube.com/watch?v=uxQxd_z_uqc",
-                start: 0,
-                width: 640,
-                height: 480,
-              },
-            },
-          ],
-        })
-      ).toEqual({ isNotEmpty: true, length: 0 });
-    });
   });
 });

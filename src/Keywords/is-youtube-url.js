@@ -1,4 +1,4 @@
-import StringUtils from "../Utils/StringUtils";
+import StringUtils from "../Utils/StringUtils/index.js";
 
 export default {
   type: "string",

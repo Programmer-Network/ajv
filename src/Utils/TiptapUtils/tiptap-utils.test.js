@@ -52,6 +52,57 @@ describe("TiptapUtils", () => {
     });
   });
 
+  describe("containsYouTubeVideo", () => {
+    test("should return false if an argument is not an object or an array", () => {
+      expect(TiptapUtils.containsYouTubeVideo()).toEqual(false);
+      expect(TiptapUtils.containsYouTubeVideo("")).toEqual(false);
+      expect(TiptapUtils.containsYouTubeVideo("Test Test")).toEqual(false);
+    });
+
+    test("should return false if an argument is an empty object or an array", () => {
+      expect(TiptapUtils.containsYouTubeVideo({})).toEqual(false);
+      expect(TiptapUtils.containsYouTubeVideo([])).toEqual(false);
+    });
+
+    test("should return true if an argument is valid and contains a valid YouTube src", () => {
+      const data = {
+        type: "doc",
+        content: [
+          {
+            type: "youtube",
+            attrs: {
+              src: "https://www.youtube.com/watch?v=uxQxd_z_uqc",
+              start: 0,
+              width: 640,
+              height: 480,
+            },
+          },
+        ],
+      };
+
+      expect(TiptapUtils.containsYouTubeVideo(data.content)).toEqual(true);
+    });
+
+    test("should return false if an argument is valid but contains an invalid YouTube src", () => {
+      const data = {
+        type: "doc",
+        content: [
+          {
+            type: "youtube",
+            attrs: {
+              src: "https://google.com",
+              start: 0,
+              width: 640,
+              height: 480,
+            },
+          },
+        ],
+      };
+
+      expect(TiptapUtils.containsYouTubeVideo(data.content)).toEqual(false);
+    });
+  });
+
   describe("hasText", () => {
     test("should return isNotEmpty true and length for object with text", () => {
       expect(
@@ -63,6 +114,25 @@ describe("TiptapUtils", () => {
       expect(
         TiptapUtils.hasText({ type: "other", content: "Some content" })
       ).toEqual({ isNotEmpty: false, length: 0 });
+    });
+
+    test("should not require text length if content contains youtube video", () => {
+      expect(
+        TiptapUtils.hasText({
+          type: "doc",
+          content: [
+            {
+              type: "youtube",
+              attrs: {
+                src: "https://www.youtube.com/watch?v=uxQxd_z_uqc",
+                start: 0,
+                width: 640,
+                height: 480,
+              },
+            },
+          ],
+        })
+      ).toEqual({ isNotEmpty: true, length: 0 });
     });
   });
 });

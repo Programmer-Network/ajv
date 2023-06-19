@@ -41,7 +41,28 @@ class TiptapUtils {
     return 0;
   };
 
+  containsYouTubeVideo = (content) => {
+    if (!content || !Array.isArray(content) || content.length === 0) {
+      return false;
+    }
+
+    const YTNode = Array.isArray(content)
+      ? content.find((node) => node.type === "youtube")
+      : content;
+
+    return (
+      YTNode?.attrs?.src && StringUtils.isValidYouTubeURL(YTNode.attrs.src)
+    );
+  };
+
   hasText = (obj) => {
+    if (this.containsYouTubeVideo(obj.content)) {
+      return {
+        isNotEmpty: true,
+        length: 0,
+      };
+    }
+
     const totalLength = this.countObjectText(obj);
 
     return {

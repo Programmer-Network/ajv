@@ -22,6 +22,7 @@ describe("Keywords", () => {
         type: "object",
         properties: { foo: { type: "string", "is-youtube-url": true } },
       };
+
       const validate = ajv.compile(schema);
       const valid = validate({
         foo: "https://www.youtube.com/watch?v=uxQxd_z_uqc&t=24sd",
@@ -35,10 +36,14 @@ describe("Keywords", () => {
         type: "object",
         properties: { foo: { type: "string", "is-youtube-url": true } },
       };
+
       const validate = ajv.compile(schema);
       const valid = validate({ foo: "https://example.com" });
 
+      const [error] = validate.errors;
+
       expect(valid).toBe(false);
+      expect(error.message).toBe("Invalid YouTube URL");
     });
   });
 

@@ -103,6 +103,10 @@ describe("StringUtils", () => {
     test("A string with Danish characters should be valid", () => {
       expect(StringUtils.containsDisallowedCharacters("äöå")).toBeFalsy();
     });
+
+    test("Should pass with the given special characters", () => {
+      expect(StringUtils.containsDisallowedCharacters("!/-?., '")).toBeFalsy();
+    });
   });
 
   describe("Test isStringComposedOfWhitespace function", () => {
@@ -128,7 +132,7 @@ describe("StringUtils", () => {
     });
 
     test("should return false with appropriate error message for string with non-alphanumeric characters", () => {
-      const result = StringUtils.isSecureString("Hello, world!");
+      const result = StringUtils.isSecureString("Hello, world ++++");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
         "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"

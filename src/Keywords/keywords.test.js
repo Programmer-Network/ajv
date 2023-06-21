@@ -224,7 +224,7 @@ describe("Keywords", () => {
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "This is some text /",
+        foo: "This is some text ####",
       });
 
       const [error] = validate.errors;
@@ -248,7 +248,7 @@ describe("Keywords", () => {
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "This is some text /",
+        foo: "This is some text ###",
       });
 
       const [error] = validate.errors;

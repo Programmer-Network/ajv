@@ -69,9 +69,9 @@ describe("StringUtils", () => {
 
   describe("removeSpecialCharacters", () => {
     test("should remove special characters from the string", () => {
-      expect(StringUtils.removeSpecialCharacters("Hello, +world!")).toBe(
-        "Hello world"
-      );
+      expect(
+        StringUtils.removeSpecialCharacters("     Hello, +world!     ")
+      ).toBe("Hello world");
     });
   });
 

@@ -7,6 +7,7 @@ import {
 
 class StringUtils {
   /**
+   * @url https://qwerty.dev/whitespace/
    * Safely parses a JSON string. If the input is a valid JSON string, it is parsed and returned as a value property in an object.
    * If the input is not a valid JSON string, the value property in the returned object is null and an error message is provided.
    *
@@ -67,6 +68,7 @@ class StringUtils {
    */
   removeSpecialCharacters(value) {
     return value
+      .trim()
       .replace(UNICODE_SPACE_CHARACTERS_REGEX, "")
       .replace(COMBINED_CHARACTERS_REGEX, "")
       .replace(SPECIAL_CHARACTERS_AND_WHITE_SPACE, "");

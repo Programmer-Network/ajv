@@ -50,6 +50,44 @@ describe("TiptapUtils", () => {
     test("should return 0 for undefined node", () => {
       expect(TiptapUtils.countObjectText()).toBe(0);
     });
+
+    test("should return 0 count for a whitespace only text", () => {
+      expect(
+        TiptapUtils.countObjectText({
+          type: "doc",
+          content: [
+            {
+              type: "paragraph",
+              content: [
+                {
+                  type: "text",
+                  text: "                                                                ",
+                },
+              ],
+            },
+          ],
+        })
+      ).toBe(0);
+    });
+
+    test("should return 0 count for a zero-width space only text", () => {
+      expect(
+        TiptapUtils.countObjectText({
+          type: "doc",
+          content: [
+            {
+              type: "paragraph",
+              content: [
+                {
+                  type: "text",
+                  text: " ​",
+                },
+              ],
+            },
+          ],
+        })
+      ).toBe(0);
+    });
   });
 
   describe("containsYouTubeVideo", () => {

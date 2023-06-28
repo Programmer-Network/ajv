@@ -135,7 +135,7 @@ describe("StringUtils", () => {
       const result = StringUtils.isSecureString("Hello, world ++++");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
-        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space"
       );
     });
 
@@ -143,7 +143,7 @@ describe("StringUtils", () => {
       const result = StringUtils.isSecureString("Hello@world");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
-        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space"
       );
     });
 

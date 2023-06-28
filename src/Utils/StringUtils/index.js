@@ -26,12 +26,12 @@ class StringUtils {
   }
 
   /**
-   * Checks if a string contains any characters that are not alphanumeric, "-", "!", "?", ",", ".", "/", "'", double quote or a space.
+   * Checks if a string contains any characters that are not alphanumeric, "-", "!", "?", ",", ".", "/", "'", double quote, underscore or a space.
    * @param {string} value - The string to check.
    * @returns {boolean} - Returns true if the string contains disallowed characters, else false.
    */
   containsDisallowedCharacters(value) {
-    return /[^a-zA-Z0-9-!'"?.,\-/ \u00C0-\u02AF]/.test(value);
+    return /[^a-zA-Z0-9-!'"?.,\-/_ \u00C0-\u02AF]/.test(value);
   }
 
   /**
@@ -140,7 +140,7 @@ class StringUtils {
       return {
         isValid: false,
         errorMessage:
-          "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space",
+          "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space",
       };
     }
 

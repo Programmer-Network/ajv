@@ -231,7 +231,7 @@ describe("Keywords", () => {
 
       expect(valid).toBe(false);
       expect(error.message).toBe(
-        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space"
       );
     });
 
@@ -255,7 +255,7 @@ describe("Keywords", () => {
 
       expect(valid).toBe(false);
       expect(error.message).toBe(
-        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, or a space"
+        "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space"
       );
     });
 

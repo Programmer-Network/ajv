@@ -45,6 +45,34 @@ describe("Keywords", () => {
       expect(valid).toBe(false);
       expect(error.message).toBe("Invalid YouTube URL");
     });
+
+    test("should pass if url is falsy but the minLength is 0 or not present", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: { type: "string", "is-youtube-url": true },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({ foo: "" });
+
+      expect(valid).toBe(true);
+    });
+
+    test("should fail if url is falsy value but the minLength equal or greater then 1", () => {
+      const schema = {
+        type: "object",
+        properties: {
+          foo: { type: "string", minLength: 2, "is-youtube-url": true },
+        },
+      };
+
+      const validate = ajv.compile(schema);
+      const valid = validate({ foo: "dsadsadasdsa" });
+
+      expect(valid).toBe(false);
+    });
   });
 
   describe("has-text", () => {

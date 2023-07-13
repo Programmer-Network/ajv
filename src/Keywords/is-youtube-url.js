@@ -4,9 +4,13 @@ export default {
   type: "string",
   errors: true,
   keyword: "is-youtube-url",
-  compile: function compile() {
+  compile: function compile(_, parentSchema) {
     return function validate(value) {
       validate.errors = null;
+
+      if (!value && !parentSchema?.minLength) {
+        return true;
+      }
 
       if (!StringUtils.isValidYouTubeURL(value)) {
         validate.errors = [
@@ -16,6 +20,7 @@ export default {
             params: { invalidInput: value },
           },
         ];
+
         return false;
       }
 

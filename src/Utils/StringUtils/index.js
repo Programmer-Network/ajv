@@ -100,7 +100,7 @@ class StringUtils {
     }
 
     const regex =
-      /^https?:\/\/(?:www\.)?youtube.com\/watch\?(?=.*v=\w+)(?:\S+)?$|^https?:\/\/youtu.be\/\w+$/;
+      /^https?:\/\/(?:www\.)?youtube.com\/watch\?(?=.*v=[\w-]+)(?:\S+)?$|^https?:\/\/youtu.be\/[\w-]+$/;
     return regex.test(value);
   }
 

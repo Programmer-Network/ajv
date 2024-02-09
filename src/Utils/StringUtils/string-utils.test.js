@@ -237,5 +237,19 @@ describe("StringUtils", () => {
         false
       );
     });
+
+    test("should return true for standard YouTube watch URL with dash in video ID", () => {
+      expect(
+        StringUtils.isValidYouTubeURL(
+          "https://www.youtube.com/watch?v=dQw-4w9WgXcQ"
+        )
+      ).toBe(true);
+    });
+
+    test("should return true for shortened YouTube URL with dash in video ID", () => {
+      expect(
+        StringUtils.isValidYouTubeURL("https://youtu.be/dQw-4w9WgXcQ")
+      ).toBe(true);
+    });
   });
 });

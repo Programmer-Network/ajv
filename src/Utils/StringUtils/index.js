@@ -87,21 +87,22 @@ class StringUtils {
   /**
    * Checks if the given string is a valid YouTube URL.
    *
-   * The function tests if the string matches the standard format for a YouTube
-   * watch URL, which is: https?://(www.)youtube.com/watch?v={videoId}
+   * The function tests if the string matches either the standard format for a YouTube
+   * watch URL, which is: https?://(www.)youtube.com/watch?v={videoId}, or the shortened
+   * URL format: https?://youtu.be/{videoId}
    *
    * @param {string} value - The string to be checked.
    * @returns {boolean} Returns `true` if the string is a valid YouTube URL, otherwise returns `false`.
    */
-  isValidYouTubeURL = (value) => {
+  isValidYouTubeURL(value) {
     if (!value) {
       return false;
     }
 
-    return /^https?:\/\/(?:www\.)?youtube.com\/watch\?(?=.*v=\w+)(?:\S+)?$/.test(
-      value
-    );
-  };
+    const regex =
+      /^https?:\/\/(?:www\.)?youtube.com\/watch\?(?=.*v=\w+)(?:\S+)?$|^https?:\/\/youtu.be\/\w+$/;
+    return regex.test(value);
+  }
 
   /**
    * Checks if a string is secure. A string is considered secure if it meets the following criteria:

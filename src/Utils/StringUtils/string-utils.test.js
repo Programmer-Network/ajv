@@ -184,4 +184,58 @@ describe("StringUtils", () => {
       });
     });
   });
+
+  describe("isValidYouTubeURL", () => {
+    test("should return true for standard YouTube watch URL", () => {
+      expect(
+        StringUtils.isValidYouTubeURL(
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        )
+      ).toBe(true);
+    });
+
+    test("should return true for HTTPS standard YouTube watch URL without www", () => {
+      expect(
+        StringUtils.isValidYouTubeURL("https://youtube.com/watch?v=dQw4w9WgXcQ")
+      ).toBe(true);
+    });
+
+    test("should return true for HTTP standard YouTube watch URL", () => {
+      expect(
+        StringUtils.isValidYouTubeURL(
+          "http://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        )
+      ).toBe(true);
+    });
+
+    test("should return true for shortened YouTube URL", () => {
+      expect(
+        StringUtils.isValidYouTubeURL("https://youtu.be/dQw4w9WgXcQ")
+      ).toBe(true);
+    });
+
+    test("should return false for invalid YouTube URL with missing video ID", () => {
+      expect(
+        StringUtils.isValidYouTubeURL("https://www.youtube.com/watch?v=")
+      ).toBe(false);
+    });
+
+    test("should return false for invalid YouTube URL with incorrect domain", () => {
+      expect(
+        StringUtils.isValidYouTubeURL(
+          "https://www.youtu.com/watch?v=dQw4w9WgXcQ"
+        )
+      ).toBe(false);
+    });
+
+    test("should return false for invalid shortened YouTube URL with missing video ID", () => {
+      expect(StringUtils.isValidYouTubeURL("https://youtu.be/")).toBe(false);
+    });
+
+    test("should return false for non-YouTube URL", () => {
+      expect(StringUtils.isValidYouTubeURL("https://www.google.com")).toBe(
+        false
+      );
+    });
+  });
 });

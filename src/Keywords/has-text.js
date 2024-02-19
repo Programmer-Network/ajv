@@ -4,14 +4,14 @@ import TiptapUtils from "../Utils/TiptapUtils/index.js";
 export default {
   type: "string",
   errors: true,
-  keyword: "hasText",
+  keyword: "has-text",
   validate: function validate(schema, input) {
     const { data } = StringUtils.safeJSONParse(input);
 
     if (!data) {
       validate.errors = [
         {
-          keyword: "hasText",
+          keyword: "has-text",
           message: "The value must contain text",
         },
       ];
@@ -28,7 +28,7 @@ export default {
     if (!isNotEmpty) {
       validate.errors = [
         {
-          keyword: "hasText",
+          keyword: "has-text",
           message: "The value must contain text",
         },
       ];
@@ -39,7 +39,7 @@ export default {
     if (schema.minLength && length < schema.minLength) {
       validate.errors = [
         {
-          keyword: "hasText",
+          keyword: "has-text",
           message: `The text must have a length greater than or equal to ${schema.minLength} characters`,
           params: { minLength: schema.minLength },
         },
@@ -50,7 +50,7 @@ export default {
     if (schema.maxLength && length > schema.maxLength) {
       validate.errors = [
         {
-          keyword: "hasText",
+          keyword: "has-text",
           message: `The length of the text cannot exceed ${schema.maxLength} characters`,
           params: { maxLength: schema.maxLength },
         },

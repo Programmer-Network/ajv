@@ -141,7 +141,7 @@ describe("TiptapUtils", () => {
     });
   });
 
-  describe("hasText", () => {
+  describe("has-text", () => {
     test("should return isNotEmpty true and length for object with text", () => {
       expect(
         TiptapUtils.hasText({ type: "text", text: "Hello world!" })

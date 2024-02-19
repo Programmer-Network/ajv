@@ -43,7 +43,7 @@ const article = {
     content: {
       type: "string",
       getBadWords: false,
-      hasText: { minLength: contentMinLength },
+      "has-text": { minLength: contentMinLength },
     },
     isDraft: {
       type: "boolean",

@@ -4,7 +4,7 @@ const comment = {
   required: ["content"],
   properties: {
     content: {
-      hasText: { minLength: 10, maxLength: 750 },
+      "has-text": { minLength: 10, maxLength: 750 },
       type: "string",
     },
   },

@@ -82,7 +82,7 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            hasText: { minLength: 5 },
+            "has-text": { minLength: 5 },
           },
         },
       };
@@ -101,7 +101,7 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            hasText: { minLength: 5 },
+            "has-text": { minLength: 5 },
           },
         },
       };
@@ -125,7 +125,7 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            hasText: { maxLength: 5 },
+            "has-text": { maxLength: 5 },
           },
         },
       };
@@ -149,7 +149,7 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            hasText: true,
+            "has-text": true,
           },
         },
       };
@@ -171,7 +171,7 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            hasText: { minLength: 5, max: 300 },
+            "has-text": { minLength: 5, max: 300 },
           },
         },
       };

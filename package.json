@@ -23,7 +23,8 @@
     "lint:fix": "eslint --cache --fix src",
     "lint:quiet": "eslint --cache --quiet src",
     "test:ci": "vitest",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "types:check": "tsc"
   },
   "lint-staged": {
     "*.+(js)": [

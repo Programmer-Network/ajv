@@ -3,6 +3,8 @@ import TiptapUtils from "../Utils/TiptapUtils/index.js";
 import { KeywordDefinition, SchemaValidateFunction } from "ajv";
 import { DataValidateFunction } from "ajv/dist/types/index.js";
 
+const keywordName = "has-text";
+
 const validate: SchemaValidateFunction | DataValidateFunction = (
   schema: any,
   input: any
@@ -12,7 +14,7 @@ const validate: SchemaValidateFunction | DataValidateFunction = (
   if (!data) {
     validate.errors = [
       {
-        keyword: "has-text",
+        keyword: keywordName,
         message: "The value must contain text"
       }
     ];
@@ -29,7 +31,7 @@ const validate: SchemaValidateFunction | DataValidateFunction = (
   if (!isNotEmpty) {
     validate.errors = [
       {
-        keyword: "has-text",
+        keyword: keywordName,
         message: "The value must contain text"
       }
     ];

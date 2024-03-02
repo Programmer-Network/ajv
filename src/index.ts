@@ -1,16 +1,4 @@
-import { keywords } from "./Keywords/index.js";
-import Ajv from "ajv";
-import addCustomMessages from "ajv-errors";
-import addFormats from "ajv-formats";
-
-export const ajv = addFormats(
-  addCustomMessages(
-    new Ajv({ allErrors: true, $data: true, removeAdditional: true })
-  )
-);
-
-keywords.map(keyword => ajv.addKeyword(keyword));
-
-export default {
-  keywords
-};
+export { default as getBadWords } from "./Keywords/get-bad-words";
+export { default as hasText } from "./Keywords/has-text";
+export { default as secureString } from "./Keywords/is-secure-string";
+export { default as validYouTubeUrl } from "./Keywords/is-youtube-url";

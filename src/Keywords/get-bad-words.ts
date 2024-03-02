@@ -2,7 +2,7 @@ import StringUtils from "../Utils/StringUtils";
 import { KeywordDefinition, SchemaValidateFunction } from "ajv";
 import { DataValidateFunction } from "ajv/dist/types";
 
-const keywordName = "getBadWords";
+const keywordName = "disallow-profanity";
 
 const keyword: KeywordDefinition = {
   type: "string",

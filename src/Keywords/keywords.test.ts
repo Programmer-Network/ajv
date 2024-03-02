@@ -1,11 +1,22 @@
-import { ajv } from "..";
+import { keywords } from ".";
+import Ajv from "ajv";
+import addCustomMessages from "ajv-errors";
+import addFormats from "ajv-formats";
+
+const ajv = addFormats(
+  addCustomMessages(
+    new Ajv({ allErrors: true, $data: true, removeAdditional: true })
+  )
+);
+
+keywords.map(keyword => ajv.addKeyword(keyword));
 
 describe("Keywords", () => {
   describe("getBadWords", () => {
-    test("should fail if getBadWords returns bad words", () => {
+    it("should fail if getBadWords returns bad words", () => {
       const schema = {
         type: "object",
-        properties: { foo: { type: "string", getBadWords: false } }
+        properties: { foo: { type: "string", "disallow-profanity": false } }
       };
       const validate = ajv.compile(schema);
       validate({ foo: "hi penis" });
@@ -16,7 +27,7 @@ describe("Keywords", () => {
   });
 
   describe("is-youtube-url", () => {
-    test("should pass if url is valid", () => {
+    it("should pass if url is valid", () => {
       const schema = {
         type: "object",
         properties: { foo: { type: "string", "is-youtube-url": true } }
@@ -30,7 +41,7 @@ describe("Keywords", () => {
       expect(valid).toBe(true);
     });
 
-    test("should fail if url is invalid", () => {
+    it("should fail if url is invalid", () => {
       const schema = {
         type: "object",
         properties: { foo: { type: "string", "is-youtube-url": true } }
@@ -43,7 +54,7 @@ describe("Keywords", () => {
       expect(validate?.errors?.[0].message).toBe("Invalid YouTube URL");
     });
 
-    test("should pass if url is falsy but the minLength is 0 or not present", () => {
+    it("should pass if url is falsy but the minLength is 0 or not present", () => {
       const schema = {
         type: "object",
         properties: {
@@ -57,7 +68,7 @@ describe("Keywords", () => {
       expect(valid).toBe(true);
     });
 
-    test("should fail if url is falsy value but the minLength equal or greater then 1", () => {
+    it("should fail if url is falsy value but the minLength equal or greater then 1", () => {
       const schema = {
         type: "object",
         properties: {
@@ -73,7 +84,7 @@ describe("Keywords", () => {
   });
 
   describe("has-text", () => {
-    test("should pass if the text has at least 5 characters", () => {
+    it("should pass if the text has at least 5 characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -92,7 +103,7 @@ describe("Keywords", () => {
       expect(valid).toBe(true);
     });
 
-    test("should fail if the text doesn't have at least 5 characters", () => {
+    it("should fail if the text doesn't have at least 5 characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -114,7 +125,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if the has more then 5 characters", () => {
+    it("should fail if the has more then 5 characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -136,7 +147,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if there's no text", () => {
+    it("should fail if there's no text", () => {
       const schema = {
         type: "object",
         properties: {
@@ -156,7 +167,7 @@ describe("Keywords", () => {
       expect(validate?.errors?.[0].message).toBe("The value must contain text");
     });
 
-    test("should pass if the text contains a valid YouTube URL", () => {
+    it("should pass if the text contains a valid YouTube URL", () => {
       const schema = {
         type: "object",
         properties: {
@@ -192,7 +203,7 @@ describe("Keywords", () => {
   });
 
   describe("secure-string", () => {
-    test("should pass if the string is empty", () => {
+    it("should pass if the string is empty", () => {
       const schema = {
         type: "object",
         properties: {
@@ -211,7 +222,7 @@ describe("Keywords", () => {
       expect(valid).toBe(true);
     });
 
-    test("should pass if the string is secure", () => {
+    it("should pass if the string is secure", () => {
       const schema = {
         type: "object",
         properties: {
@@ -230,7 +241,7 @@ describe("Keywords", () => {
       expect(valid).toBe(true);
     });
 
-    test("should fail if the string contains dissallowed characters", () => {
+    it("should fail if the string contains dissallowed characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -252,7 +263,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if the string contains dissallowed characters", () => {
+    it("should fail if the string contains dissallowed characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -274,7 +285,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if the string contains profanity", () => {
+    it("should fail if the string contains profanity", () => {
       const schema = {
         type: "object",
         properties: {
@@ -296,7 +307,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if the string only contains space characters", () => {
+    it("should fail if the string only contains space characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -318,7 +329,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if the string only contains space characters", () => {
+    it("should fail if the string only contains space characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -340,7 +351,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if the string contains unicode characters", () => {
+    it("should fail if the string contains unicode characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -362,7 +373,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail if the string contains combined characters", () => {
+    it("should fail if the string contains combined characters", () => {
       const schema = {
         type: "object",
         properties: {
@@ -384,7 +395,7 @@ describe("Keywords", () => {
       );
     });
 
-    test("should fail in the correct order", () => {
+    it("should fail in the correct order", () => {
       const schema = {
         type: "object",
         properties: {

@@ -19,7 +19,7 @@
     "test:watch": "vitest",
     "pre-commit": "lint-staged",
     "format": "prettier --write \"**/*.+(js|json|css|md)\"",
-    "lint:ci": "eslint --cache .",
+    "lint:ci": "eslint --cache src",
     "lint:fix": "eslint --cache --fix src",
     "lint:quiet": "eslint --cache --quiet src",
     "test:ci": "vitest",

@@ -1,4 +1,9 @@
 module.exports = {
+  rules: {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-namespace": "off"
+  },
+  parser: "@typescript-eslint/parser",
   env: {
     es2021: true,
   },
@@ -24,4 +29,5 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
+
 };

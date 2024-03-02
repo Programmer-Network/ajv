@@ -1,9 +1,9 @@
+import StringUtils from "../Utils/StringUtils/index.js";
 import { SchemaValidateFunction } from "ajv";
 import {
   DataValidateFunction,
-  KeywordDefinition,
+  KeywordDefinition
 } from "ajv/dist/types/index.js";
-import StringUtils from "../Utils/StringUtils/index.js";
 
 const keyword: KeywordDefinition = {
   type: "string",
@@ -24,8 +24,8 @@ const keyword: KeywordDefinition = {
           {
             keyword: "is-youtube-url",
             message: "Invalid YouTube URL",
-            params: { invalidInput: value },
-          },
+            params: { invalidInput: value }
+          }
         ];
 
         return false;
@@ -35,7 +35,7 @@ const keyword: KeywordDefinition = {
     };
 
     return validate;
-  },
+  }
 };
 
 export default keyword;

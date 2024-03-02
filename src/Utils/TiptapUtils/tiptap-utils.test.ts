@@ -17,7 +17,7 @@ describe("TiptapUtils", () => {
 
   describe("countObjectText", () => {
     it("should return 0 for empty object", () => {
-      // @ts-expect-error
+      // @ts-expect-error - countObjectText expects an object or an array
       expect(TiptapUtils.countObjectText({})).toBe(0);
     });
 
@@ -31,7 +31,7 @@ describe("TiptapUtils", () => {
       expect(
         TiptapUtils.countObjectText([
           { type: "text", text: "Hello" },
-          { type: "text", text: "world!" },
+          { type: "text", text: "world!" }
         ])
       ).toBe(10);
     });
@@ -42,14 +42,14 @@ describe("TiptapUtils", () => {
           type: "nested",
           children: [
             { type: "text", text: "Hello" },
-            { type: "text", text: "world!" },
-          ],
+            { type: "text", text: "world!" }
+          ]
         })
       ).toBe(10);
     });
 
     it("should return 0 for undefined node", () => {
-      // @ts-expect-error
+      // @ts-expect-error - countObjectText expects an object or an array
       expect(TiptapUtils.countObjectText()).toBe(0);
     });
 
@@ -63,11 +63,11 @@ describe("TiptapUtils", () => {
               content: [
                 {
                   type: "text",
-                  text: "                                                                ",
-                },
-              ],
-            },
-          ],
+                  text: "                                                                "
+                }
+              ]
+            }
+          ]
         })
       ).toBe(0);
     });
@@ -82,11 +82,11 @@ describe("TiptapUtils", () => {
               content: [
                 {
                   type: "text",
-                  text: " ​",
-                },
-              ],
-            },
-          ],
+                  text: " ​"
+                }
+              ]
+            }
+          ]
         })
       ).toBe(0);
     });
@@ -94,16 +94,16 @@ describe("TiptapUtils", () => {
 
   describe("containsYouTubeVideo", () => {
     it("should return false if an argument is not an object or an array", () => {
-      // @ts-expect-error
+      // @ts-expect-error - containsYouTubeVideo expects an an array
       expect(TiptapUtils.containsYouTubeVideo()).toEqual(false);
-      // @ts-expect-error
+      // @ts-expect-error - containsYouTubeVideo expects an an array
       expect(TiptapUtils.containsYouTubeVideo("")).toEqual(false);
-      // @ts-expect-error
+      // @ts-expect-error - containsYouTubeVideo expects an an array
       expect(TiptapUtils.containsYouTubeVideo("Test Test")).toEqual(false);
     });
 
     it("should return false if an argument is an empty object or an array", () => {
-      // @ts-expect-error
+      // @ts-expect-error - containsYouTubeVideo expects an an array
       expect(TiptapUtils.containsYouTubeVideo({})).toEqual(false);
       expect(TiptapUtils.containsYouTubeVideo([])).toEqual(false);
     });
@@ -118,10 +118,10 @@ describe("TiptapUtils", () => {
               src: "https://www.youtube.com/watch?v=uxQxd_z_uqc",
               start: 0,
               width: 640,
-              height: 480,
-            },
-          },
-        ],
+              height: 480
+            }
+          }
+        ]
       };
 
       expect(TiptapUtils.containsYouTubeVideo(data.content)).toEqual(true);
@@ -137,10 +137,10 @@ describe("TiptapUtils", () => {
               src: "https://google.com",
               start: 0,
               width: 640,
-              height: 480,
-            },
-          },
-        ],
+              height: 480
+            }
+          }
+        ]
       };
 
       expect(TiptapUtils.containsYouTubeVideo(data.content)).toEqual(false);
@@ -156,7 +156,7 @@ describe("TiptapUtils", () => {
 
     it("should return isNotEmpty false and 0 length for object without text", () => {
       expect(
-        // @ts-expect-error
+        // @ts-expect-error - hasText expects an object with type and text properties
         TiptapUtils.hasText({ type: "other", content: "Some content" })
       ).toEqual({ isNotEmpty: false, length: 0 });
     });

@@ -6,16 +6,16 @@ describe("StringUtils", () => {
       expect(StringUtils.safeJSONParse('{"name":"John","age":30}')).toEqual({
         data: {
           name: "John",
-          age: 30,
+          age: 30
         },
-        error: null,
+        error: null
       });
     });
 
     it("should return original value for invalid JSON string", () => {
       expect(StringUtils.safeJSONParse('{"name":"John",age:30}')).toEqual({
         data: null,
-        error: "The string is not a valid JSON string",
+        error: "The string is not a valid JSON string"
       });
     });
   });
@@ -49,14 +49,14 @@ describe("StringUtils", () => {
   describe("getBadWords", () => {
     it("should return a string array of a single bad word", () => {
       expect(StringUtils.getBadWords("There is a penis.")).toStrictEqual([
-        "penis",
+        "penis"
       ]);
     });
 
     it("should return a string array of multiple bad words", () => {
       expect(StringUtils.getBadWords("There is a penis fuck.")).toStrictEqual([
         "penis",
-        "fuck",
+        "fuck"
       ]);
     });
 
@@ -127,7 +127,7 @@ describe("StringUtils", () => {
     it("should return true for secure string", () => {
       expect(StringUtils.isSecureString("Hello-world!")).toEqual({
         isValid: true,
-        errorMessage: null,
+        errorMessage: null
       });
     });
 
@@ -166,7 +166,7 @@ describe("StringUtils", () => {
     it("should return true if the string has white spaces", () => {
       expect(StringUtils.isSecureString("Hello-world! ")).toEqual({
         isValid: true,
-        errorMessage: null,
+        errorMessage: null
       });
     });
 
@@ -174,13 +174,13 @@ describe("StringUtils", () => {
       expect(StringUtils.isSecureString("Hey there penis")).toEqual({
         isValid: false,
         errorMessage:
-          "Profanity is not allowed. Please remove the following words: 'penis'",
+          "Profanity is not allowed. Please remove the following words: 'penis'"
       });
 
       expect(StringUtils.isSecureString("Hey there penis fuck")).toEqual({
         isValid: false,
         errorMessage:
-          "Profanity is not allowed. Please remove the following words: 'penis, fuck'",
+          "Profanity is not allowed. Please remove the following words: 'penis, fuck'"
       });
     });
   });

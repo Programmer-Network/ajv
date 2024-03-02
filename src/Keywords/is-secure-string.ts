@@ -1,9 +1,9 @@
+import StringUtils from "../Utils/StringUtils/index.js";
 import { SchemaValidateFunction } from "ajv";
 import {
   DataValidateFunction,
-  KeywordDefinition,
+  KeywordDefinition
 } from "ajv/dist/types/index.js";
-import StringUtils from "../Utils/StringUtils/index.js";
 
 /**
  * The 'compile' method is a function that AJV calls during the schema compilation.
@@ -33,8 +33,8 @@ const keyword: KeywordDefinition = {
           {
             keyword: "secure-string",
             message: `${errorMessage}`,
-            params: { invalidInput: data },
-          },
+            params: { invalidInput: data }
+          }
         ];
         return false;
       }
@@ -43,7 +43,7 @@ const keyword: KeywordDefinition = {
     };
 
     return validate;
-  },
+  }
 };
 
 export default keyword;

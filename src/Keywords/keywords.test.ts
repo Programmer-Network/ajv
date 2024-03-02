@@ -5,7 +5,7 @@ describe("Keywords", () => {
     test("should fail if getBadWords returns bad words", () => {
       const schema = {
         type: "object",
-        properties: { foo: { type: "string", getBadWords: false } },
+        properties: { foo: { type: "string", getBadWords: false } }
       };
       const validate = ajv.compile(schema);
       validate({ foo: "hi penis" });
@@ -19,12 +19,12 @@ describe("Keywords", () => {
     test("should pass if url is valid", () => {
       const schema = {
         type: "object",
-        properties: { foo: { type: "string", "is-youtube-url": true } },
+        properties: { foo: { type: "string", "is-youtube-url": true } }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "https://www.youtube.com/watch?v=uxQxd_z_uqc&t=24sd",
+        foo: "https://www.youtube.com/watch?v=uxQxd_z_uqc&t=24sd"
       });
 
       expect(valid).toBe(true);
@@ -33,7 +33,7 @@ describe("Keywords", () => {
     test("should fail if url is invalid", () => {
       const schema = {
         type: "object",
-        properties: { foo: { type: "string", "is-youtube-url": true } },
+        properties: { foo: { type: "string", "is-youtube-url": true } }
       };
 
       const validate = ajv.compile(schema);
@@ -47,8 +47,8 @@ describe("Keywords", () => {
       const schema = {
         type: "object",
         properties: {
-          foo: { type: "string", "is-youtube-url": true },
-        },
+          foo: { type: "string", "is-youtube-url": true }
+        }
       };
 
       const validate = ajv.compile(schema);
@@ -61,8 +61,8 @@ describe("Keywords", () => {
       const schema = {
         type: "object",
         properties: {
-          foo: { type: "string", minLength: 2, "is-youtube-url": true },
-        },
+          foo: { type: "string", minLength: 2, "is-youtube-url": true }
+        }
       };
 
       const validate = ajv.compile(schema);
@@ -79,14 +79,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "has-text": { minLength: 5 },
-          },
-        },
+            "has-text": { minLength: 5 }
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Is it common for people that are transitions career towards becoming a decent developer, to hire other developer as mentors and have some kind of support routine? "},{"type":"hardBreak"},{"type":"hardBreak"},{"type":"text","text":"IF yes, is there any platform that you know, that intermediates that? "},{"type":"hardBreak"}]}]}',
+        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Is it common for people that are transitions career towards becoming a decent developer, to hire other developer as mentors and have some kind of support routine? "},{"type":"hardBreak"},{"type":"hardBreak"},{"type":"text","text":"IF yes, is there any platform that you know, that intermediates that? "},{"type":"hardBreak"}]}]}'
       });
 
       expect(valid).toBe(true);
@@ -98,14 +98,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "has-text": { minLength: 5 },
-          },
-        },
+            "has-text": { minLength: 5 }
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Is"}]}]}',
+        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Is"}]}]}'
       });
 
       expect(valid).toBe(false);
@@ -120,14 +120,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "has-text": { maxLength: 5 },
-          },
-        },
+            "has-text": { maxLength: 5 }
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}]}]}',
+        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}]}]}'
       });
 
       expect(valid).toBe(false);
@@ -142,14 +142,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "has-text": true,
-          },
-        },
+            "has-text": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":""}]}]}',
+        foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":""}]}]}'
       });
 
       expect(valid).toBe(false);
@@ -162,9 +162,9 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "has-text": { minLength: 5, max: 300 },
-          },
-        },
+            "has-text": { minLength: 5, max: 300 }
+          }
+        }
       };
 
       const data = JSON.stringify({
@@ -176,15 +176,15 @@ describe("Keywords", () => {
               src: "https://www.youtube.com/watch?v=uxQxd_z_uqc",
               start: 0,
               width: 640,
-              height: 480,
-            },
-          },
-        ],
+              height: 480
+            }
+          }
+        ]
       });
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: data,
+        foo: data
       });
 
       expect(valid).toBe(true);
@@ -198,14 +198,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "",
+        foo: ""
       });
 
       expect(valid).toBe(true);
@@ -217,14 +217,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "This is some text",
+        foo: "This is some text"
       });
 
       expect(valid).toBe(true);
@@ -236,14 +236,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "This is some text ####",
+        foo: "This is some text ####"
       });
 
       expect(valid).toBe(false);
@@ -258,14 +258,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "This is some text ###",
+        foo: "This is some text ###"
       });
 
       expect(valid).toBe(false);
@@ -280,14 +280,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "This is some text penis",
+        foo: "This is some text penis"
       });
 
       expect(valid).toBe(false);
@@ -302,14 +302,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "            ",
+        foo: "            "
       });
 
       expect(valid).toBe(false);
@@ -324,14 +324,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "            ",
+        foo: "            "
       });
 
       expect(valid).toBe(false);
@@ -346,14 +346,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "This string contains unicode character ​",
+        foo: "This string contains unicode character ​"
       });
 
       expect(valid).toBe(false);
@@ -368,14 +368,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "Hello\u034Fworld",
+        foo: "Hello\u034Fworld"
       });
 
       expect(valid).toBe(false);
@@ -390,14 +390,14 @@ describe("Keywords", () => {
         properties: {
           foo: {
             type: "string",
-            "secure-string": true,
-          },
-        },
+            "secure-string": true
+          }
+        }
       };
 
       const validate = ajv.compile(schema);
       const valid = validate({
-        foo: "  Hello\u034Fworld penis ​",
+        foo: "  Hello\u034Fworld penis ​"
       });
 
       expect(valid).toBe(false);

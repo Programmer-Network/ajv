@@ -1,6 +1,6 @@
+import StringUtils from "../Utils/StringUtils";
 import { KeywordDefinition, SchemaValidateFunction } from "ajv";
 import { DataValidateFunction } from "ajv/dist/types";
-import StringUtils from "../Utils/StringUtils";
 
 const keywordName = "getBadWords";
 
@@ -22,8 +22,8 @@ const keyword: KeywordDefinition = {
             message: `Profanity is not allowed. Please remove the following words: '${badWords.join(
               ", "
             )}'`,
-            params: { invalidInput: value },
-          },
+            params: { invalidInput: value }
+          }
         ];
 
         return false;
@@ -33,7 +33,7 @@ const keyword: KeywordDefinition = {
     };
 
     return validate;
-  },
+  }
 };
 
 export default keyword;

@@ -21,7 +21,7 @@ export const UNICODE_SPACE_CHARACTERS = [
   "\u205F",
   "\u3000",
   "\u2800",
-  "\uFEFF",
+  "\uFEFF"
 ];
 
 export const COMBINED_CHARACTERS = [
@@ -54,7 +54,7 @@ export const COMBINED_CHARACTERS = [
   "\u1D177",
   "\u1D178",
   "\u1D179",
-  "\u1D17A",
+  "\u1D17A"
 ];
 
 export const SPECIAL_CHARACTERS_AND_WHITE_SPACE = /[^\w\s]|_/g;
@@ -65,7 +65,7 @@ export const UNICODE_SPACE_CHARACTERS_REGEX = new RegExp(
 );
 
 export const COMBINED_CHARACTERS_REGEX = COMBINED_CHARACTERS.map(
-  (character) => new RegExp(character, "gu")
+  character => new RegExp(character, "gu")
 );
 
 export const DISALLOWED_CHARACTERS_REGEX = new RegExp(

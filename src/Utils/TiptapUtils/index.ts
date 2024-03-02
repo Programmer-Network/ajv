@@ -63,7 +63,7 @@ class TiptapUtils {
 
     return {
       isNotEmpty: totalLength > 0,
-      length: totalLength,
+      length: totalLength
     };
   };
 }

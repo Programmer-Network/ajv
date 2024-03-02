@@ -1,5 +1,4 @@
 import { keywords } from "./Keywords/index.js";
-
 import Ajv from "ajv";
 import addCustomMessages from "ajv-errors";
 import addFormats from "ajv-formats";
@@ -10,8 +9,8 @@ export const ajv = addFormats(
   )
 );
 
-keywords.map((keyword) => ajv.addKeyword(keyword));
+keywords.map(keyword => ajv.addKeyword(keyword));
 
 export default {
-  keywords,
+  keywords
 };

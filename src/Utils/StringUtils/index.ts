@@ -2,7 +2,7 @@ import {
   BAD_WORDS_REGEX,
   COMBINED_CHARACTERS_REGEX,
   SPECIAL_CHARACTERS_AND_WHITE_SPACE,
-  UNICODE_SPACE_CHARACTERS_REGEX,
+  UNICODE_SPACE_CHARACTERS_REGEX
 } from "../../constants.js";
 
 interface ParseResult {
@@ -29,7 +29,7 @@ class StringUtils {
     } catch (_) {
       return {
         data: null,
-        error: "The string is not a valid JSON string",
+        error: "The string is not a valid JSON string"
       };
     }
   }
@@ -67,7 +67,7 @@ class StringUtils {
    * @returns {Array<string>} - Returns an array of bad words if found, else an empty array.
    */
   getBadWords(value: string): string[] {
-    return [...value.matchAll(BAD_WORDS_REGEX)].map((match) => match[0]);
+    return [...value.matchAll(BAD_WORDS_REGEX)].map(match => match[0]);
   }
 
   /**
@@ -120,21 +120,21 @@ class StringUtils {
     if (value === "") {
       return {
         isValid: true,
-        errorMessage: null,
+        errorMessage: null
       };
     }
 
     if (this.containsUnicodeSpaceCharacters(value)) {
       return {
         isValid: false,
-        errorMessage: "The string contains Unicode space characters",
+        errorMessage: "The string contains Unicode space characters"
       };
     }
 
     if (this.containsCombinedCharacters(value)) {
       return {
         isValid: false,
-        errorMessage: "The string contains combined characters",
+        errorMessage: "The string contains combined characters"
       };
     }
 
@@ -142,15 +142,14 @@ class StringUtils {
       return {
         isValid: false,
         errorMessage:
-          "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space",
+          "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space"
       };
     }
 
     if (this.isStringComposedOfWhitespace(value)) {
       return {
         isValid: false,
-        errorMessage:
-          "The string is composed entirely of whitespace characters",
+        errorMessage: "The string is composed entirely of whitespace characters"
       };
     }
 
@@ -160,7 +159,7 @@ class StringUtils {
         isValid: false,
         errorMessage: `Profanity is not allowed. Please remove the following words: '${badWords.join(
           ", "
-        )}'`,
+        )}'`
       };
     }
 

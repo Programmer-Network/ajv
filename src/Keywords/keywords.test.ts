@@ -1,4 +1,4 @@
-import { ajv } from "../../ajv";
+import { ajv } from "..";
 
 describe("Keywords", () => {
   describe("getBadWords", () => {
@@ -8,9 +8,8 @@ describe("Keywords", () => {
         properties: { foo: { type: "string", getBadWords: false } },
       };
       const validate = ajv.compile(schema);
-      const valid = validate({ foo: "hi penis" });
-      const [error] = validate.errors;
-      expect(error.message).toBe(
+      validate({ foo: "hi penis" });
+      expect(validate?.errors?.[0].message).toBe(
         "Profanity is not allowed. Please remove the following words: 'penis'"
       );
     });
@@ -40,10 +39,8 @@ describe("Keywords", () => {
       const validate = ajv.compile(schema);
       const valid = validate({ foo: "https://example.com" });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe("Invalid YouTube URL");
+      expect(validate?.errors?.[0].message).toBe("Invalid YouTube URL");
     });
 
     test("should pass if url is falsy but the minLength is 0 or not present", () => {
@@ -111,10 +108,8 @@ describe("Keywords", () => {
         foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Is"}]}]}',
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The text must have a length greater than or equal to 5 characters"
       );
     });
@@ -135,10 +130,8 @@ describe("Keywords", () => {
         foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}]}]}',
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The length of the text cannot exceed 5 characters"
       );
     });
@@ -159,10 +152,8 @@ describe("Keywords", () => {
         foo: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":""}]}]}',
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe("The value must contain text");
+      expect(validate?.errors?.[0].message).toBe("The value must contain text");
     });
 
     test("should pass if the text contains a valid YouTube URL", () => {
@@ -255,10 +246,8 @@ describe("Keywords", () => {
         foo: "This is some text ####",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space"
       );
     });
@@ -279,10 +268,8 @@ describe("Keywords", () => {
         foo: "This is some text ###",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The string contains characters that are not alphanumeric, a dash, an exclamation mark, a question mark, an underscore, or a space"
       );
     });
@@ -303,10 +290,8 @@ describe("Keywords", () => {
         foo: "This is some text penis",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "Profanity is not allowed. Please remove the following words: 'penis'"
       );
     });
@@ -327,10 +312,8 @@ describe("Keywords", () => {
         foo: "            ",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The string is composed entirely of whitespace characters"
       );
     });
@@ -351,10 +334,8 @@ describe("Keywords", () => {
         foo: "            ",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The string is composed entirely of whitespace characters"
       );
     });
@@ -375,10 +356,8 @@ describe("Keywords", () => {
         foo: "This string contains unicode character ​",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The string contains Unicode space characters"
       );
     });
@@ -399,10 +378,10 @@ describe("Keywords", () => {
         foo: "Hello\u034Fworld",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe("The string contains combined characters");
+      expect(validate?.errors?.[0].message).toBe(
+        "The string contains combined characters"
+      );
     });
 
     test("should fail in the correct order", () => {
@@ -421,10 +400,8 @@ describe("Keywords", () => {
         foo: "  Hello\u034Fworld penis ​",
       });
 
-      const [error] = validate.errors;
-
       expect(valid).toBe(false);
-      expect(error.message).toBe(
+      expect(validate?.errors?.[0].message).toBe(
         "The string contains Unicode space characters"
       );
     });

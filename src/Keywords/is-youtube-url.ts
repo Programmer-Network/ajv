@@ -1,12 +1,19 @@
+import { SchemaValidateFunction } from "ajv";
+import {
+  DataValidateFunction,
+  KeywordDefinition,
+} from "ajv/dist/types/index.js";
 import StringUtils from "../Utils/StringUtils/index.js";
 
-export default {
+const keyword: KeywordDefinition = {
   type: "string",
   errors: true,
   keyword: "is-youtube-url",
   compile: function compile(_, parentSchema) {
-    return function validate(value) {
-      validate.errors = null;
+    const validate: SchemaValidateFunction | DataValidateFunction = (
+      value: any
+    ) => {
+      validate.errors = [];
 
       if (!value && !parentSchema?.minLength) {
         return true;
@@ -26,5 +33,9 @@ export default {
 
       return true;
     };
+
+    return validate;
   },
 };
+
+export default keyword;

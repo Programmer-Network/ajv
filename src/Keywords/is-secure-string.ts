@@ -1,3 +1,8 @@
+import { SchemaValidateFunction } from "ajv";
+import {
+  DataValidateFunction,
+  KeywordDefinition,
+} from "ajv/dist/types/index.js";
 import StringUtils from "../Utils/StringUtils/index.js";
 
 /**
@@ -12,15 +17,17 @@ import StringUtils from "../Utils/StringUtils/index.js";
  * @property {boolean} errors - Indicates that the keyword returns errors.
  * @property {function} compile - A function that AJV calls during schema compilation.
  */
-export default {
+const keyword: KeywordDefinition = {
   keyword: "secure-string",
   type: "string",
   errors: true,
   compile: function compile() {
-    return function validate(data) {
-      validate.errors = null;
-      const { isValid, errorMessage } = StringUtils.isSecureString(data);
+    const validate: SchemaValidateFunction | DataValidateFunction = (
+      data: any
+    ) => {
+      validate.errors = [];
 
+      const { isValid, errorMessage } = StringUtils.isSecureString(data);
       if (!isValid) {
         validate.errors = [
           {
@@ -31,7 +38,12 @@ export default {
         ];
         return false;
       }
+
       return true;
     };
+
+    return validate;
   },
 };
+
+export default keyword;

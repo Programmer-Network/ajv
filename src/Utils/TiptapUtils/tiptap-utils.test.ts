@@ -2,7 +2,7 @@ import TiptapUtils from "./index.js";
 
 describe("TiptapUtils", () => {
   describe("reduceTextNodesToString", () => {
-    test("should reduce text nodes to a single string", () => {
+    it("should reduce text nodes to a single string", () => {
       expect(
         TiptapUtils.reduceTextNodesToString(
           '[{"type":"text","text":"Hello"},{"type":"text","text":"world!"}]'
@@ -10,23 +10,24 @@ describe("TiptapUtils", () => {
       ).toBe("Hello world!");
     });
 
-    test("should return empty string for invalid JSON value", () => {
+    it("should return empty string for invalid JSON value", () => {
       expect(TiptapUtils.reduceTextNodesToString("invalid-json")).toBe("");
     });
   });
 
   describe("countObjectText", () => {
-    test("should return 0 for empty object", () => {
+    it("should return 0 for empty object", () => {
+      // @ts-expect-error
       expect(TiptapUtils.countObjectText({})).toBe(0);
     });
 
-    test("should return length of text property for text node", () => {
+    it("should return length of text property for text node", () => {
       expect(
         TiptapUtils.countObjectText({ type: "text", text: "Hello world!" })
       ).toBe(11);
     });
 
-    test("should return sum of text lengths for array of nodes", () => {
+    it("should return sum of text lengths for array of nodes", () => {
       expect(
         TiptapUtils.countObjectText([
           { type: "text", text: "Hello" },
@@ -35,7 +36,7 @@ describe("TiptapUtils", () => {
       ).toBe(10);
     });
 
-    test("should return sum of text lengths for nested objects", () => {
+    it("should return sum of text lengths for nested objects", () => {
       expect(
         TiptapUtils.countObjectText({
           type: "nested",
@@ -47,11 +48,12 @@ describe("TiptapUtils", () => {
       ).toBe(10);
     });
 
-    test("should return 0 for undefined node", () => {
+    it("should return 0 for undefined node", () => {
+      // @ts-expect-error
       expect(TiptapUtils.countObjectText()).toBe(0);
     });
 
-    test("should return 0 count for a whitespace only text", () => {
+    it("should return 0 count for a whitespace only text", () => {
       expect(
         TiptapUtils.countObjectText({
           type: "doc",
@@ -70,7 +72,7 @@ describe("TiptapUtils", () => {
       ).toBe(0);
     });
 
-    test("should return 0 count for a zero-width space only text", () => {
+    it("should return 0 count for a zero-width space only text", () => {
       expect(
         TiptapUtils.countObjectText({
           type: "doc",
@@ -91,23 +93,27 @@ describe("TiptapUtils", () => {
   });
 
   describe("containsYouTubeVideo", () => {
-    test("should return false if an argument is not an object or an array", () => {
+    it("should return false if an argument is not an object or an array", () => {
+      // @ts-expect-error
       expect(TiptapUtils.containsYouTubeVideo()).toEqual(false);
+      // @ts-expect-error
       expect(TiptapUtils.containsYouTubeVideo("")).toEqual(false);
+      // @ts-expect-error
       expect(TiptapUtils.containsYouTubeVideo("Test Test")).toEqual(false);
     });
 
-    test("should return false if an argument is an empty object or an array", () => {
+    it("should return false if an argument is an empty object or an array", () => {
+      // @ts-expect-error
       expect(TiptapUtils.containsYouTubeVideo({})).toEqual(false);
       expect(TiptapUtils.containsYouTubeVideo([])).toEqual(false);
     });
 
-    test("should return true if an argument is valid and contains a valid YouTube src", () => {
+    it("should return true if an argument is valid and contains a valid YouTube src", () => {
       const data = {
         type: "doc",
         content: [
           {
-            type: "youtube",
+            type: "youtube" as const,
             attrs: {
               src: "https://www.youtube.com/watch?v=uxQxd_z_uqc",
               start: 0,
@@ -121,12 +127,12 @@ describe("TiptapUtils", () => {
       expect(TiptapUtils.containsYouTubeVideo(data.content)).toEqual(true);
     });
 
-    test("should return false if an argument is valid but contains an invalid YouTube src", () => {
+    it("should return false if an argument is valid but contains an invalid YouTube src", () => {
       const data = {
         type: "doc",
         content: [
           {
-            type: "youtube",
+            type: "youtube" as const,
             attrs: {
               src: "https://google.com",
               start: 0,
@@ -142,14 +148,15 @@ describe("TiptapUtils", () => {
   });
 
   describe("has-text", () => {
-    test("should return isNotEmpty true and length for object with text", () => {
+    it("should return isNotEmpty true and length for object with text", () => {
       expect(
         TiptapUtils.hasText({ type: "text", text: "Hello world!" })
       ).toEqual({ isNotEmpty: true, length: 11 });
     });
 
-    test("should return isNotEmpty false and 0 length for object without text", () => {
+    it("should return isNotEmpty false and 0 length for object without text", () => {
       expect(
+        // @ts-expect-error
         TiptapUtils.hasText({ type: "other", content: "Some content" })
       ).toEqual({ isNotEmpty: false, length: 0 });
     });

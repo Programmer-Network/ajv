@@ -1,8 +1,11 @@
+import { TiptapTypes } from "../../types/index.js";
 import StringUtils from "../StringUtils/index.js";
 
 class TiptapUtils {
-  reduceTextNodesToString(value) {
-    const { data } = StringUtils.safeJSONParse(value);
+  reduceTextNodesToString(value: string): string {
+    const { data } = StringUtils.safeJSONParse(
+      value
+    ) as TiptapTypes.SafeJSONParseResult;
 
     if (!data || !Array.isArray(data)) {
       return "";
@@ -15,13 +18,9 @@ class TiptapUtils {
       .trim();
   }
 
-  countObjectText = (node) => {
+  countObjectText(node: TiptapTypes.Node | TiptapTypes.Node[]): number {
     if (!node) {
       return 0;
-    }
-
-    if (node?.type === "text") {
-      return StringUtils.removeSpecialCharacters(node.text).length;
     }
 
     if (Array.isArray(node)) {
@@ -29,6 +28,10 @@ class TiptapUtils {
         (sum, current) => sum + this.countObjectText(current),
         0
       );
+    }
+
+    if (node?.type === "text") {
+      return StringUtils.removeSpecialCharacters(node.text).length;
     }
 
     if (typeof node === "object") {
@@ -39,23 +42,23 @@ class TiptapUtils {
     }
 
     return 0;
-  };
+  }
 
-  containsYouTubeVideo = (content) => {
-    if (!content || !Array.isArray(content) || content.length === 0) {
+  containsYouTubeVideo(content: TiptapTypes.Node[]): boolean {
+    if (!content || !Array.isArray(content)) {
       return false;
     }
 
-    const YTNode = Array.isArray(content)
-      ? content.find((node) => node.type === "youtube")
-      : content;
-
-    return (
-      YTNode?.attrs?.src && StringUtils.isValidYouTubeURL(YTNode.attrs.src)
+    const YTNode = content.find(
+      (node): node is TiptapTypes.YouTubeNode => node.type === "youtube"
     );
-  };
 
-  hasText = (obj) => {
+    return YTNode ? StringUtils.isValidYouTubeURL(YTNode.attrs.src) : false;
+  }
+
+  hasText = (
+    obj: TiptapTypes.Node
+  ): { isNotEmpty: boolean; length: number } => {
     const totalLength = this.countObjectText(obj);
 
     return {

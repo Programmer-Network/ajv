@@ -2,7 +2,7 @@ import StringUtils from "./index.js";
 
 describe("StringUtils", () => {
   describe("safeJSONParse", () => {
-    test("should parse valid JSON string", () => {
+    it("should parse valid JSON string", () => {
       expect(StringUtils.safeJSONParse('{"name":"John","age":30}')).toEqual({
         data: {
           name: "John",
@@ -12,7 +12,7 @@ describe("StringUtils", () => {
       });
     });
 
-    test("should return original value for invalid JSON string", () => {
+    it("should return original value for invalid JSON string", () => {
       expect(StringUtils.safeJSONParse('{"name":"John",age:30}')).toEqual({
         data: null,
         error: "The string is not a valid JSON string",
@@ -21,13 +21,13 @@ describe("StringUtils", () => {
   });
 
   describe("containsUnicodeSpaceCharacters", () => {
-    test("should return true for string with Unicode space characters", () => {
+    it("should return true for string with Unicode space characters", () => {
       expect(
         StringUtils.containsUnicodeSpaceCharacters("Hello\u2003world")
       ).toBe(true);
     });
 
-    test("should return false for string without Unicode space characters", () => {
+    it("should return false for string without Unicode space characters", () => {
       expect(StringUtils.containsUnicodeSpaceCharacters("Hello world")).toBe(
         false
       );
@@ -35,32 +35,32 @@ describe("StringUtils", () => {
   });
 
   describe("containsCombinedCharacters", () => {
-    test("should return true for string with combined characters", () => {
+    it("should return true for string with combined characters", () => {
       expect(StringUtils.containsCombinedCharacters("Hello\u034Fworld")).toBe(
         true
       );
     });
 
-    test("should return false for string without combined characters", () => {
+    it("should return false for string without combined characters", () => {
       expect(StringUtils.containsCombinedCharacters("Hello world")).toBe(false);
     });
   });
 
   describe("getBadWords", () => {
-    test("should return a string array of a single bad word", () => {
+    it("should return a string array of a single bad word", () => {
       expect(StringUtils.getBadWords("There is a penis.")).toStrictEqual([
         "penis",
       ]);
     });
 
-    test("should return a string array of multiple bad words", () => {
+    it("should return a string array of multiple bad words", () => {
       expect(StringUtils.getBadWords("There is a penis fuck.")).toStrictEqual([
         "penis",
         "fuck",
       ]);
     });
 
-    test("should return false for string without bad words", () => {
+    it("should return false for string without bad words", () => {
       expect(StringUtils.getBadWords("This is a good sentence.")).toStrictEqual(
         []
       );
@@ -68,7 +68,7 @@ describe("StringUtils", () => {
   });
 
   describe("removeSpecialCharacters", () => {
-    test("should remove special characters from the string", () => {
+    it("should remove special characters from the string", () => {
       expect(
         StringUtils.removeSpecialCharacters("     Hello, +world!     ")
       ).toBe("Hello world");
@@ -76,45 +76,45 @@ describe("StringUtils", () => {
   });
 
   describe("Test containsDisallowedCharacters function", () => {
-    test("Check string with only alphanumeric characters", () => {
+    it("Check string with only alphanumeric characters", () => {
       expect(StringUtils.containsDisallowedCharacters("Test123")).toBeFalsy();
     });
 
-    test("Check string with alphanumeric and allowed special characters", () => {
+    it("Check string with alphanumeric and allowed special characters", () => {
       expect(
         StringUtils.containsDisallowedCharacters("Test123-!?")
       ).toBeFalsy();
     });
 
-    test("Check string with disallowed special characters", () => {
+    it("Check string with disallowed special characters", () => {
       expect(StringUtils.containsDisallowedCharacters("Test123@")).toBeTruthy();
     });
 
-    test("Check string with alphanumeric, allowed and disallowed special characters", () => {
+    it("Check string with alphanumeric, allowed and disallowed special characters", () => {
       expect(
         StringUtils.containsDisallowedCharacters("Test123-!?@")
       ).toBeTruthy();
     });
 
-    test("Check empty string", () => {
+    it("Check empty string", () => {
       expect(StringUtils.containsDisallowedCharacters("")).toBeFalsy();
     });
 
-    test("A string with Danish characters should be valid", () => {
+    it("A string with Danish characters should be valid", () => {
       expect(StringUtils.containsDisallowedCharacters("äöå")).toBeFalsy();
     });
 
-    test("Should pass with the given special characters", () => {
+    it("Should pass with the given special characters", () => {
       expect(StringUtils.containsDisallowedCharacters("!/-?., '")).toBeFalsy();
     });
   });
 
   describe("Test isStringComposedOfWhitespace function", () => {
-    test("Should return true if a value is a space", () => {
+    it("Should return true if a value is a space", () => {
       expect(StringUtils.isStringComposedOfWhitespace(" ")).toBeTruthy();
     });
 
-    test("Should return true if a value is a tab", () => {
+    it("Should return true if a value is a tab", () => {
       expect(StringUtils.isStringComposedOfWhitespace(" ")).toBeTruthy();
       expect(StringUtils.isStringComposedOfWhitespace("       ")).toBeTruthy();
       expect(
@@ -124,14 +124,14 @@ describe("StringUtils", () => {
   });
 
   describe("isSecureString", () => {
-    test("should return true for secure string", () => {
+    it("should return true for secure string", () => {
       expect(StringUtils.isSecureString("Hello-world!")).toEqual({
         isValid: true,
         errorMessage: null,
       });
     });
 
-    test("should return false with appropriate error message for string with non-alphanumeric characters", () => {
+    it("should return false with appropriate error message for string with non-alphanumeric characters", () => {
       const result = StringUtils.isSecureString("Hello, world ++++");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
@@ -139,7 +139,7 @@ describe("StringUtils", () => {
       );
     });
 
-    test("should return false with appropriate error message for string with disallowed special characters", () => {
+    it("should return false with appropriate error message for string with disallowed special characters", () => {
       const result = StringUtils.isSecureString("Hello@world");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
@@ -147,7 +147,7 @@ describe("StringUtils", () => {
       );
     });
 
-    test("should return false with appropriate error message for string with Unicode space characters", () => {
+    it("should return false with appropriate error message for string with Unicode space characters", () => {
       const result = StringUtils.isSecureString("Hello\u2003world");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
@@ -155,7 +155,7 @@ describe("StringUtils", () => {
       );
     });
 
-    test("should return false with appropriate error message for string with combined characters", () => {
+    it("should return false with appropriate error message for string with combined characters", () => {
       const result = StringUtils.isSecureString("Hello\u034Fworld");
       expect(result.isValid).toBe(false);
       expect(result.errorMessage).toBe(
@@ -163,14 +163,14 @@ describe("StringUtils", () => {
       );
     });
 
-    test("should return true if the string has white spaces", () => {
+    it("should return true if the string has white spaces", () => {
       expect(StringUtils.isSecureString("Hello-world! ")).toEqual({
         isValid: true,
         errorMessage: null,
       });
     });
 
-    test("should fail and return a proper message if profanity is used", () => {
+    it("should fail and return a proper message if profanity is used", () => {
       expect(StringUtils.isSecureString("Hey there penis")).toEqual({
         isValid: false,
         errorMessage:
@@ -186,7 +186,7 @@ describe("StringUtils", () => {
   });
 
   describe("isValidYouTubeURL", () => {
-    test("should return true for standard YouTube watch URL", () => {
+    it("should return true for standard YouTube watch URL", () => {
       expect(
         StringUtils.isValidYouTubeURL(
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -194,13 +194,13 @@ describe("StringUtils", () => {
       ).toBe(true);
     });
 
-    test("should return true for HTTPS standard YouTube watch URL without www", () => {
+    it("should return true for HTTPS standard YouTube watch URL without www", () => {
       expect(
         StringUtils.isValidYouTubeURL("https://youtube.com/watch?v=dQw4w9WgXcQ")
       ).toBe(true);
     });
 
-    test("should return true for HTTP standard YouTube watch URL", () => {
+    it("should return true for HTTP standard YouTube watch URL", () => {
       expect(
         StringUtils.isValidYouTubeURL(
           "http://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -208,19 +208,19 @@ describe("StringUtils", () => {
       ).toBe(true);
     });
 
-    test("should return true for shortened YouTube URL", () => {
+    it("should return true for shortened YouTube URL", () => {
       expect(
         StringUtils.isValidYouTubeURL("https://youtu.be/dQw4w9WgXcQ")
       ).toBe(true);
     });
 
-    test("should return false for invalid YouTube URL with missing video ID", () => {
+    it("should return false for invalid YouTube URL with missing video ID", () => {
       expect(
         StringUtils.isValidYouTubeURL("https://www.youtube.com/watch?v=")
       ).toBe(false);
     });
 
-    test("should return false for invalid YouTube URL with incorrect domain", () => {
+    it("should return false for invalid YouTube URL with incorrect domain", () => {
       expect(
         StringUtils.isValidYouTubeURL(
           "https://www.youtu.com/watch?v=dQw4w9WgXcQ"
@@ -228,17 +228,17 @@ describe("StringUtils", () => {
       ).toBe(false);
     });
 
-    test("should return false for invalid shortened YouTube URL with missing video ID", () => {
+    it("should return false for invalid shortened YouTube URL with missing video ID", () => {
       expect(StringUtils.isValidYouTubeURL("https://youtu.be/")).toBe(false);
     });
 
-    test("should return false for non-YouTube URL", () => {
+    it("should return false for non-YouTube URL", () => {
       expect(StringUtils.isValidYouTubeURL("https://www.google.com")).toBe(
         false
       );
     });
 
-    test("should return true for standard YouTube watch URL with dash in video ID", () => {
+    it("should return true for standard YouTube watch URL with dash in video ID", () => {
       expect(
         StringUtils.isValidYouTubeURL(
           "https://www.youtube.com/watch?v=dQw-4w9WgXcQ"
@@ -246,7 +246,7 @@ describe("StringUtils", () => {
       ).toBe(true);
     });
 
-    test("should return true for shortened YouTube URL with dash in video ID", () => {
+    it("should return true for shortened YouTube URL with dash in video ID", () => {
       expect(
         StringUtils.isValidYouTubeURL("https://youtu.be/dQw-4w9WgXcQ")
       ).toBe(true);

@@ -1,0 +1,89 @@
+name: Continuous Integration and Deployment
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+  pages: write
+  checks: write
+  deployments: write
+  actions: write
+  packages: write
+  statuses: write
+  security-events: write
+  repository-projects: write
+  pull-requests: write
+  issues: write
+  discussions: write
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install NodeJS dependencies
+        run: pnpm install
+
+      - name: Run linting
+        run: pnpm lint:ci
+
+      - name: Run type check
+        run: pnpm types:check
+
+  publish-npm:
+    needs: [lint-and-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@programmer_network"
+          cache: "pnpm"
+
+      - name: Install NodeJS dependencies
+        run: pnpm install
+
+      - name: Build the code
+        run: pnpm build
+
+      - name: Set up Git identity
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+
+      - name: Publish to npm
+        run: npm publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

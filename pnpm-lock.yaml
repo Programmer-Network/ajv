@@ -2,27 +2,27 @@ lockfileVersion: '6.0'
 
 dependencies:
   ajv:
-    specifier: ^8.12.0
-    version: 8.12.0
+    specifier: 8.13.0
+    version: 8.13.0
   ajv-errors:
-    specifier: ^3.0.0
-    version: 3.0.0(ajv@8.12.0)
+    specifier: 3.0.0
+    version: 3.0.0(ajv@8.13.0)
   ajv-formats:
-    specifier: ^2.1.1
-    version: 2.1.1(ajv@8.12.0)
+    specifier: 2.1.1
+    version: 2.1.1(ajv@8.13.0)
 
 devDependencies:
   '@trivago/prettier-plugin-sort-imports':
-    specifier: ^4.3.0
+    specifier: 4.3.0
     version: 4.3.0(prettier@3.2.5)
   '@types/jest':
-    specifier: ^29.5.12
+    specifier: 29.5.12
     version: 29.5.12
   '@typescript-eslint/eslint-plugin':
-    specifier: ^6.21.0
+    specifier: 6.21.0
     version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.53.0)(typescript@5.3.3)
   esbuild-jest:
-    specifier: ^0.5.0
+    specifier: 0.5.0
     version: 0.5.0(esbuild@0.20.1)
   eslint:
     specifier: 8.53.0
@@ -34,28 +34,28 @@ devDependencies:
     specifier: 5.0.1
     version: 5.0.1(eslint-config-prettier@9.0.0)(eslint@8.53.0)(prettier@3.2.5)
   husky:
-    specifier: ^8.0.3
+    specifier: 8.0.3
     version: 8.0.3
   jest:
-    specifier: ^29.7.0
+    specifier: 29.7.0
     version: 29.7.0
   lint-staged:
-    specifier: ^13.3.0
+    specifier: 13.3.0
     version: 13.3.0
   prettier:
-    specifier: ^3.2.5
+    specifier: 3.2.5
     version: 3.2.5
   typescript:
-    specifier: ^5.3.3
+    specifier: 5.3.3
     version: 5.3.3
   vite:
-    specifier: ^5.1.4
+    specifier: 5.1.4
     version: 5.1.4
   vite-plugin-dts:
-    specifier: ^3.7.3
+    specifier: 3.7.3
     version: 3.7.3(typescript@5.3.3)(vite@5.1.4)
   vitest:
-    specifier: ^1.3.1
+    specifier: 1.3.1
     version: 1.3.1
 
 packages:
@@ -113,7 +113,7 @@ packages:
     resolution: {integrity: sha512-oLcVCTeIFadUoArDTwpluncplrYBmTCCZZgXCbgNGvOBBiSDDK3eWO4b/+eOTli5tKv1lg+a5/NAXg+nTcei1w==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.17.0
+      '@babel/types': 7.24.0
       jsesc: 2.5.2
       source-map: 0.5.7
     dev: true
@@ -239,7 +239,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.17.0
+      '@babel/types': 7.24.0
     dev: true
 
   /@babel/plugin-syntax-async-generators@7.8.4(@babel/core@7.24.0):
@@ -1833,15 +1833,15 @@ packages:
     hasBin: true
     dev: true
 
-  /ajv-errors@3.0.0(ajv@8.12.0):
+  /ajv-errors@3.0.0(ajv@8.13.0):
     resolution: {integrity: sha512-V3wD15YHfHz6y0KdhYFjyy9vWtEVALT9UrxfN3zqlI6dMioHnJrqOYfyPKol3oqrnCM9uwkcdCwkJ0WUcbLMTQ==}
     peerDependencies:
       ajv: ^8.0.1
     dependencies:
-      ajv: 8.12.0
+      ajv: 8.13.0
     dev: false
 
-  /ajv-formats@2.1.1(ajv@8.12.0):
+  /ajv-formats@2.1.1(ajv@8.13.0):
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
     peerDependencies:
       ajv: ^8.0.0
@@ -1849,7 +1849,7 @@ packages:
       ajv:
         optional: true
     dependencies:
-      ajv: 8.12.0
+      ajv: 8.13.0
     dev: false
 
   /ajv@6.12.6:
@@ -1861,8 +1861,8 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /ajv@8.12.0:
-    resolution: {integrity: sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==}
+  /ajv@8.13.0:
+    resolution: {integrity: sha512-PRA911Blj99jR5RMeTunVbNXMF6Lp4vZXnk5GQjcnUWUTsrXtekg/pnmFFI2u/I36Y/2bITGS30GZCXei6uNkA==}
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
